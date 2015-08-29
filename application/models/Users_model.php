@@ -331,6 +331,8 @@ class Users_model extends CI_Model {
             $sql .= "
                     first_name = " . $this->db->escape($data['first_name']) . ",
                     last_name = " . $this->db->escape($data['last_name']) . ",
+                    birth_date = " . $this->db->escape($data['birth_date']) . ",
+                    gender = " . $this->db->escape($data['gender']) . ",
                     email = " . $this->db->escape($data['email']) . ",
                     updated = '" . date('Y-m-d H:i:s') . "'
                 WHERE id = " . $this->db->escape($user_id) . "

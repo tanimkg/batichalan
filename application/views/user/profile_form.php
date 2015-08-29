@@ -1,6 +1,10 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 
-<?php echo form_open('', array('role'=>'form')); ?>
+<?php
+$birth_date = isset($user['birth_date']) ? $user['birth_date'] : '';
+$gender = isset($user['gender']) ? $user['gender'] : '';
+
+echo form_open('', array('role'=>'form')); ?>
 
     <div class="row">
         <?php // username ?>
@@ -26,6 +30,21 @@
             <?php echo form_input(array('name'=>'last_name', 'value'=>set_value('last_name', (isset($user['last_name']) ? $user['last_name'] : '')), 'class'=>'form-control')); ?>
         </div>
     </div>
+
+<div class="row">
+    <?php // birthday ?>
+    <div class="form-group col-sm-4<?php echo form_error('birth_date') ? ' has-error' : ''; ?>">
+        <?php echo form_label(lang('users input birth_date'), 'birth_date', array('class' => 'control-label')); ?>
+        <?php echo form_input(array('name' => 'birth_date', 'value' => set_value('birth_date', $birth_date), 'class' => 'form-control')); ?>
+    </div>
+
+    <?php // gender ?>
+    <div class="form-group col-sm-3<?php echo form_error('gender') ? ' has-error' : ''; ?>">
+        <?php echo form_label(lang('users input gender'), 'gender', array('class' => 'control-label')); ?>
+        <?php echo form_dropdown('gender', [1 => "Male", 0 => 'Female', 2=> 'Prefer not to say'],set_value('gender', $gender), 'class="form-control"'); ?>
+    </div>
+
+</div>
 
     <div class="row">
         <?php // email ?>

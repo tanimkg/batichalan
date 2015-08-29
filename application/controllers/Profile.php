@@ -17,9 +17,6 @@ class Profile extends Private_Controller {
         // load the users model
         $this->load->model('users_model');
 
-        // profile must be visited once logged in, so user id can
-        // safely be retrieved here
-        //$this->_uid = $this->session->userdata('id');
     }
 
 
@@ -38,6 +35,8 @@ class Profile extends Private_Controller {
         $this->form_validation->set_rules('username', lang('users input username'), 'required|trim|min_length[5]|max_length[30]|callback__check_username');
         $this->form_validation->set_rules('first_name', lang('users input first_name'), 'required|trim|min_length[2]|max_length[32]');
         $this->form_validation->set_rules('last_name', lang('users input last_name'), 'required|trim|min_length[2]|max_length[32]');
+        $this->form_validation->set_rules('birth_date', lang('users input birth_date'), 'trim');
+        $this->form_validation->set_rules('gender', lang('users input gender'), 'required|trim|min_length[1]');
         $this->form_validation->set_rules('email', lang('users input email'), 'required|trim|max_length[128]|valid_email|callback__check_email');
         $this->form_validation->set_rules('password', lang('users input password'), 'min_length[5]|matches[password_repeat]');
         $this->form_validation->set_rules('password_repeat', lang('users input password_repeat'), '');
@@ -115,7 +114,7 @@ class Profile extends Private_Controller {
 
 
         // load views
-        $data['content'] = $this->load->view('profile/_index_script', $content_data, TRUE);
+        $data['content'] = $this->load->view('profile/index', $content_data, TRUE);
         $this->load->view($this->template, $data);
     }
 

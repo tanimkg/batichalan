@@ -7,7 +7,7 @@
 $lang['address title']                  = "My Addresses";
 $lang['address list title']             = "My Addresses";
 $lang['address not exist']              = "Contact do not exist";
-$lang['address id required']            = "Contact ID is required";
+$lang['address id required']            = "Address ID is required";
 $lang['address add title']              = "Add an Address";
 $lang['address edit title']             = "Edit an Address";
 $lang['address edit error']             = 'You cannot edit any address that does not belong to you!';
@@ -45,8 +45,11 @@ $lang['address input edit_live']             = "Insert Duration";
 // Messages
 $lang['address msg send_success']       = "Thanks for contacting us, %s! Your message has been sent.";
 $lang['address msg update']            = 'Address has been updated';
+$lang['address msg deleted']            = 'Address has been deleted';
 
 // Errors
+$lang['address error belong']          = 'You cannot delete an address which you did not create';
 $lang['address error savefail']          = 'There was a problem while saving';
-$lang['address error send_failed']      = "Sorry, %s. There was a problem sending your message. Please try again.";
+$lang['address error deletefaile']      = "There was a problem while deleting the address. Please try again.";
+$lang['address not exist']      = "The address does not exist";
 $lang['address error update_failed']    = "Could not update status.";

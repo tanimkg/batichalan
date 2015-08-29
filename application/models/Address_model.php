@@ -57,6 +57,19 @@ class Address_model extends CI_Model
     }
 
 
+    function delete_address($id)
+    {
+        if ($this->db->delete($this->_db, [$this->_pk, $id])) { return TRUE; } else { return FALSE; }
+    }
+
+    function is_created_by_user($uid, $aid)
+    {
+        $q = $this->db->get_where($this->_db, ['created_by_uid' => $uid, $this->_pk => $aid]);
+        if ($q->num_rows() > 0 ) return TRUE;
+
+        return FALSE;
+    }
+
     function get_addresses_of_user($uid)
     {
         $q = $this->db->get_where($this->_db, ['created_by_uid' => $uid]);
