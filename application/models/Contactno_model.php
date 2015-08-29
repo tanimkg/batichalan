@@ -77,6 +77,23 @@ class Contactno_model extends CI_Model
     }
 
 
+    function get_only_number_by_id($id)
+    {
+        $q = $this->get_contact_by_id($id);
+        return $q['no'];
+    }
+
+
+    function is_valid($id)
+    {
+        $q = $this->db->get_where($this->_db, [$this->_pk => $id]);
+
+        if ($q->num_rows() > 0) return TRUE;
+
+        return FALSE;
+    }
+
+
     /*
      * @params int
      * @return obj

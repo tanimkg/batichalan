@@ -188,3 +188,31 @@ if ( ! function_exists('generate_random_password'))
         return implode($pass);
     }
 }
+
+
+/*
+ * use this func to read cs data from user's table and convert into array of ids
+ * @params string a comma seperated string of ids
+ * @return array
+ *
+ * */
+
+if( ! function_exists('csd_to_array'))
+{
+    function csd_to_array($val)
+    {
+        $exploded = explode(',', $val);
+        // convert str into int
+        array_walk($exploded, '_cast_int');
+
+        return $exploded;
+    }
+}
+
+if (! function_exists('_cast_int'))
+{
+    function _cast_int(&$value, $key)
+    {
+        $value = (int) $value;
+    }
+}

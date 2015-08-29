@@ -16,6 +16,16 @@ class Profile extends Private_Controller {
 
         // load the users model
         $this->load->model('users_model');
+        $this->load->model('contactno_model');
+        $this->load->model('address_model');
+
+        // get logged in user's detail
+        $logged_in_user = $this->session->userdata('logged_in');
+        if ($logged_in_user['id']) {
+            $this->_uid = $logged_in_user['id'];
+        } else {
+            $this->_uid = NULL;
+        }
 
     }
 
@@ -89,11 +99,31 @@ class Profile extends Private_Controller {
      * */
     public function index()
     {
+        // display all user information
+
         if ($this->session->userdata('logged_in'))
         {
             // get user's data and display
             // uses user model
-            $userdata = $this->users_model->get_user_by_id(1); // returning row_array or bool
+            $userdata = $this->users_model->get_user_by_id($this->_uid); // returning row_array or bool
+
+            // break every CSV data fields and translate into readable info
+            $ud = $userdata->row_array();
+            // pass con ids array to the private method
+            $other_contacts  = $this->_get_other_contacts_of_user(csd_to_array($ud['other_con_ids']));
+            $other_addresses = $this->_get_other_contacts_of_user(csd_to_array($ud['other_addr_ids']));
+            //$other_educations = $this->_get_other_contacts_of_user(csd_to_array($ud['edu_ids']));
+            $followings = $this->_get_follower_or_following_of_user(csd_to_array($ud['following_uids']));
+            $followers  = $this->_get_follower_or_following_of_user(csd_to_array($ud['followed_by_uids']));
+
+            //$last_education   = $this->_get_other_contacts_of_user($ud['edu_id']);
+            unset($ud['password']);
+            unset($ud['salt']);
+            unset($ud['validation_code']);
+            $ud['primary_contact']  = $this->contactno_model->get_only_number_by_id($ud['c_contact_id']);
+            $ud['primary_address']  = $this->address_model->get_address_by_id($ud['c_addr_id']);
+            $ud['sex']  = $this->_get_gender_in_text($ud['gender']);
+
         }
         else {
             // set redirect url in flash, so that user can return here
@@ -108,8 +138,12 @@ class Profile extends Private_Controller {
 
         // set content data
         $content_data = array(
-            'user'              => $userdata,
-            'id'                => $this->session->userdata('id')
+            'usr'              => $ud,
+            'other_contacts'    => $other_contacts,
+            'other_addresses'   => $other_addresses,
+            'followings'        => $followings,
+            'followers'         => $followers,
+            'id'                => $this->_uid,
         );
 
 
@@ -122,6 +156,69 @@ class Profile extends Private_Controller {
      * PRIVATE VALIDATION CALLBACK FUNCTIONS
      **************************************************************************************/
 
+    /*
+     * @param array int contact id
+     * @return array 2D array containing contacts data, key = type, value = other*/
+    private function _get_other_contacts_of_user($cids)
+    {
+        $other_con_ids = array();
+        $this->load->model('contactno_model');
+        $this->load->model('keyvalues_model');
+        $con_types = $this->keyvalues_model->get_key_values_where_identifier('contact_type');
+
+        foreach ($cids as $cid)
+        {
+            // check the id valid
+            if ($this->contactno_model->is_valid($cid)) {
+                $con_res = $this->contactno_model->get_contact_by_id($cid);
+                $other_con_ids[$con_types[$con_res['type']]] = $con_res; // settings the type name as key
+            }
+
+        }
+        return $other_con_ids;
+    }
+
+    /*
+     * @param array int address id
+     * @return array 2D array containing address data, key = type, value = other*/
+    private function _get_other_addresses_of_user($aids)
+    {
+        $other_ids = array();
+        $this->load->model('contactno_model');
+        $this->load->model('keyvalues_model');
+        $types = $this->keyvalues_model->get_key_values_where_identifier('addr_type');
+
+        foreach ($aids as $aid)
+        {
+            // check the id valid
+            if ($this->contactno_model->is_valid($aid)) {
+                $con_res = $this->contactno_model->get_contact_by_id($aid);
+                $other_ids[$types[$con_res['addr_type']]] = $con_res; // settings the type name as key
+            }
+
+        }
+        return $other_ids;
+    }
+
+
+    /*
+     * @param array int user ids
+     * @return array Name of users and their slug/username to make link*/
+    private function _get_follower_or_following_of_user($ids)
+    {
+        $users = array();
+
+        foreach ($ids as $id)
+        {
+            // check the id valid
+            if ($this->users_model->is_valid($id)) {
+                $res = $this->users_model->get_username_and_fullname($id);
+                $users[] = $res; // settings the type name as key
+            }
+
+        }
+        return $users;
+    }
 
     /**
      * Make sure username is available
@@ -142,6 +239,19 @@ class Profile extends Private_Controller {
         }
     }
 
+
+    private function _get_gender_in_text($i)
+    {
+        switch ($i)
+        {
+            case 0: $r = "Female"; break;
+            case 1: $r = "Male"; break;
+            case 2: $r = "Prefer Not To Say"; break;
+            default: $r = "Prefer Not To Say";
+        }
+
+        return $r;
+    }
 
     /**
      * Make sure email is available

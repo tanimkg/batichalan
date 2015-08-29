@@ -78,6 +78,17 @@ class Address_model extends CI_Model
         }
     }
 
+
+    function get_formatted_addr_by_id($id)
+    {
+        $q = $this->get_address_by_id($id);
+        $text = $q['addr_line_1'] . ', '
+                .$q['addr_line_2'] . ', '
+                .$q['city'] . ', '
+                .$q['state'] . ', '
+                .$q['country'];
+    }
+
     /*
      * @params int User ID
      * @return array| bool

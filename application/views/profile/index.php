@@ -1,72 +1,58 @@
 <div class="container">
-
+<?php var_dump( $usr); ?>
     <div class="row row-offcanvas row-offcanvas-right">
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
             <div class="list-group">
-                <a href="#" class="list-group-item active">Link</a>
-                <a href="#" class="list-group-item">Link</a>
-                <a href="#" class="list-group-item">Link</a>
-                <a href="#" class="list-group-item">Link</a>
-                <a href="#" class="list-group-item">Link</a>
-                <a href="#" class="list-group-item">Link</a>
-                <a href="#" class="list-group-item">Link</a>
-                <a href="#" class="list-group-item">Link</a>
-                <a href="#" class="list-group-item">Link</a>
-                <a href="#" class="list-group-item">Link</a>
+                <a href="#" class="list-group-item active">Contacts</a>
+                <a href="#" class="list-group-item">Addresses</a>
+                <a href="#" class="list-group-item">Educations</a>
             </div>
         </div>
-<?php echo $id; // foreach ($user->result() as $usr) : ?>
+<?php //foreach ($user as $usr) : ?>
         <div class="col-xs-12 col-sm-9">
             <p class="pull-right visible-xs">
                 <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
             </p>
             <div class="jumbotron">
-                <h1><?= $usr->first_name . ' ' . $usr->last_name ?></h1>
-                <p>This is an example to show the potential of an offcanvas layout pattern in Bootstrap. Try some responsive-range viewport sizes to see it in action.</p>
+                <h1><?= $usr['first_name'] . ' ' . $usr['last_name'] ?></h1>
+                <p>From <?= $usr['primary_address']['city'] .', '.$usr['pirmary_address']['country'] ?></p>
+                <p>Follower Following</p>
             </div>
             <div class="row">
-                <div class="col-6 col-sm-6 col-lg-4">
-                    <h2>Heading</h2>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
+                <div class="col-md-8 col-sm-12 col-lg-9">
+                    <h2>Basic Info</h2>
+                    <table class="table tbl-default tbl-hover">
+                        <tr>
+                            <td></td>
+                        </tr>
+                    </table>
                     <p><a class="btn btn-default" href="#" role="button">View details »</a>
                     </p>
                 </div>
-                <!--/span-->
-                <div class="col-6 col-sm-6 col-lg-4">
-                    <h2>Heading</h2>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
-                    <p><a class="btn btn-default" href="#" role="button">View details »</a>
-                    </p>
+
+                <div class="jumbotron col-md-4 col-sm-12">
+                    <table class="table tbl-default tbl-hover">
+                        <tr>
+                            <th>Primary Contact</th>
+                            <td><?= $usr['primary_contact'] ?></td>
+                        </tr>
+                        <?php foreach($other_contacts as $ck => $cv) : ?>
+                        <tr>
+                            <th><?= $ck ?></th>
+                            <td><?= $cv['no'] ?></td>
+                        </tr>
+                        <?php endforeach; ?>
+                        <tr>
+                            <th>Gender</th>
+                            <td><?= $usr['gender'] ?></td>
+                        </tr>
+                        <tr>
+                            <th>Birthdate</th>
+                            <td><?= $usr['birth_date'] ?></td>
+                        </tr>
+                    </table>
                 </div>
-                <!--/span-->
-                <div class="col-6 col-sm-6 col-lg-4">
-                    <h2>Heading</h2>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
-                    <p><a class="btn btn-default" href="#" role="button">View details »</a>
-                    </p>
-                </div>
-                <!--/span-->
-                <div class="col-6 col-sm-6 col-lg-4">
-                    <h2>Heading</h2>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
-                    <p><a class="btn btn-default" href="#" role="button">View details »</a>
-                    </p>
-                </div>
-                <!--/span-->
-                <div class="col-6 col-sm-6 col-lg-4">
-                    <h2>Heading</h2>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
-                    <p><a class="btn btn-default" href="#" role="button">View details »</a>
-                    </p>
-                </div>
-                <!--/span-->
-                <div class="col-6 col-sm-6 col-lg-4">
-                    <h2>Heading</h2>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
-                    <p><a class="btn btn-default" href="#" role="button">View details »</a>
-                    </p>
-                </div>
-                <!--/span-->
+
             </div>
             <!--/row-->
         </div>

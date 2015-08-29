@@ -6,6 +6,7 @@ class Users_model extends CI_Model {
      * @vars
      */
     private $_db;
+    private $_pk;
 
 
     /**
@@ -17,8 +18,30 @@ class Users_model extends CI_Model {
 
         // define primary table
         $this->_db = 'users';
+        $this->_pk = 'id';
     }
 
+
+    function get_username_and_fullname ($id)
+    {
+        $sql = $this->db->select('username, first_name, last_name')
+            ->where([$this->_pk => $id, 'deleted' => 0])
+            ->get($this->_db);
+        $res = $sql->row_array();
+        return $res;
+    }
+
+
+    function is_valid($id)
+    {
+        $sql = $this->db->select('username')
+            ->where([$this->_pk => $id, 'deleted' => 0])
+            ->get($this->_db);
+
+        if ($sql->num_rows() > 0) return TRUE;
+
+        return FALSE;
+    }
 
     public function get_id_using_username($username)
     {
