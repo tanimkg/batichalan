@@ -19,7 +19,9 @@ class Address_model extends CI_Model
 
         // define primary table
         $this->_db = 'addresses';
+        $this->_pk = 'addr_id';
     }
+
     /*
          * @params array
          * @return int|bool
@@ -35,6 +37,7 @@ class Address_model extends CI_Model
 
         return FALSE;
     }
+
     /*
      * @params array
      * @return int|bool
@@ -43,10 +46,11 @@ class Address_model extends CI_Model
     {
         $_update_id = $post_values[$this->_pk];
 
-        // strip submit key from the array
+        // strip submit key and primary key from the array
         unset($post_values['submit']);
         unset($post_values[$this->_pk]);
 
+        // now update where primary key is temp pk (recorded avobe)
         if ($this->db->update($this->_db, $post_values, [$this->_pk => $_update_id])) return TRUE;
 
         return FALSE;
@@ -56,10 +60,31 @@ class Address_model extends CI_Model
     function get_addresses_of_user($uid)
     {
         $q = $this->db->get_where($this->_db, ['created_by_uid' => $uid]);
-        if ($q->num_rows())
-        {
+        if ($q->num_rows()) {
             return $q->result();
         }
     }
 
+    /*
+     * @params int User ID
+     * @return array| bool
+     * */
+    function get_address_by_id($id)
+    {
+        $q = $this->db->get_where($this->_db, [$this->_pk => $id]);
+        if ($q->num_rows() > 0) return $q->row_array();
+        return FALSE;
+    }
+
+
+    /*
+     * @return bool
+     * */
+    function check_address_belongs_to_user($uid, $aid)
+    {
+        $q = $this->db->get_where($this->_db, ['created_by_uid' => $uid, $this->_pk => $aid]);
+        if ($q->num_rows() > 0) return TRUE;
+
+        return FALSE;
+    }
 }

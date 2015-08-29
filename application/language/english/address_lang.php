@@ -8,7 +8,7 @@ $lang['address title']                  = "My Addresses";
 $lang['address not exist']              = "Contact do not exist";
 $lang['address id required']            = "Contact ID is required";
 $lang['address add title']              = "Add an Address";
-$lang['address edit title']             = "Edit a Contact";
+$lang['address edit title']             = "Edit an Address";
 $lang['address edit error']             = 'You cannot edit any address that does not belong to you!';
 $lang['address title messages_list']    = "Messages";
 
@@ -36,14 +36,14 @@ $lang['address input country']             = "Country";
 $lang['address input post_zip']             = "Post/Zip";
 $lang['address input living_since']             = "Living Since (Date)";
 $lang['address input lived_upto']             = "Lived Upto (Date)";
-$lang['address input edit_live']             = "Inser Duration";
+$lang['address input edit_live']             = "Insert Duration";
 
 
 // Messages
 $lang['address msg send_success']       = "Thanks for contacting us, %s! Your message has been sent.";
-$lang['address msg updated']            = "Message updated!";
+$lang['address msg update']            = 'Address has been updated';
 
 // Errors
-$lang['address error captcha']          = "The CAPTCHA text did not match.";
+$lang['address error savefail']          = 'There was a problem while saving';
 $lang['address error send_failed']      = "Sorry, %s. There was a problem sending your message. Please try again.";
 $lang['address error update_failed']    = "Could not update status.";

@@ -4,6 +4,9 @@ class Address extends Public_Controller
 {
 
     private $_redirect_url;
+    private $_uid;
+
+
     /**
      * Constructor
      */
@@ -30,6 +33,15 @@ class Address extends Public_Controller
         {
             $this->_redirect_url = THIS_URL;
         }
+
+        // get logged in user's detail
+        $logged_in_user = $this->session->userdata('logged_in');
+        if ($logged_in_user['id']) {
+            $this->_uid = $logged_in_user['id'];
+        } else {
+            $this->_uid = NULL;
+        }
+
     }
 
 
@@ -73,10 +85,6 @@ class Address extends Public_Controller
             redirect($this->_redirect_url);
         }
 
-        $logged_in_user = $this->session->userdata('logged_in');
-        $_uid = $logged_in_user['id'];
-
-
         // setup page header data
         $this->set_title(lang('address add title'));
 
@@ -84,18 +92,11 @@ class Address extends Public_Controller
 
         // set content data
         $this->load->model('keyvalues_model'); // prerequisite
-        $this->load->library('user_agent');  // load user agent library
-        // save the redirect_back data from referral url (where user first was prior to login)
-        $this->session->set_userdata('redirect_back', $this->agent->referrer() );
 
-        // split at /, if referrer url does not contain 'profile', then it is not profile related
-        // so set profile related to 0
-        $_dirty = explode('/', $this->session->userdata('redirect_back'));
-        $profile_related = 0;
-        if (in_array('profile', $_dirty) || in_array('dashboard', $_dirty)) $profile_related = 1;
+        $profile_related = ($this->is_profile_related()) ? 1 : 0;
 
         $content_data = array(
-            'uid' => $_uid,
+            'uid' => $this->_uid,
             'addr_id' => NULL,
             'profile_related' => $profile_related,
             'cancel' => $this->_redirect_url,
@@ -109,6 +110,21 @@ class Address extends Public_Controller
     }
 
 
+    private function is_profile_related()
+    {
+        $this->load->library('user_agent');  // load user agent library
+        // save the redirect_back data from referral url (where user first was prior to login)
+        $this->session->set_userdata('redirect_back', $this->agent->referrer() );
+
+        // split at /, if referrer url does not contain 'profile', then it is not profile related
+        // so set profile related to 0
+        $_dirty = explode('/', $this->session->userdata('redirect_back'));
+        $profile_related = FALSE;
+        if (in_array('profile', $_dirty) || in_array('dashboard', $_dirty)) $profile_related = TRUE;
+
+        return $profile_related;
+    }
+
 
 
     public function edit($id = NULL)
@@ -120,20 +136,17 @@ class Address extends Public_Controller
         }
 
         // get the data
-        $contact = $this->address_model->get_contact_by_id($id);
+        $address = $this->address_model->get_address_by_id($id);
 
         // if empty results, return to list
-        if ( ! $contact)
+        if ( ! $address)
         {
             redirect($this->_redirect_url);
         }
 
-        $logged_in_user = $this->session->userdata('logged_in');
-        $_uid = $logged_in_user['id'];
-
-        // check whether user owns the number or anyhow associated with it. Otherwise do not let user edit
+        // check whether user owns the address or anyhow associated with it. Otherwise do not let user edit
         //$_cid = $this->uri->segment(3, NULL);  // if segment fails/does not exist then return NULL
-        if ( ! $this->address_model->check_contact_belongs_to_user($_uid, $id)) {
+        if ( ! $this->address_model->check_address_belongs_to_user($this->_uid, $id)) {
 
             $this->session->set_flashdata('error', lang('contact edit error'));
             redirect($this->_redirect_url);
@@ -141,43 +154,46 @@ class Address extends Public_Controller
 
         // validators
         $this->form_validation->set_error_delimiters($this->config->item('error_delimeter_left'), $this->config->item('error_delimeter_right'));
-        $this->form_validation->set_rules('no', lang('contact input no'), 'required|trim|min_length[3]');
+        $this->form_validation->set_rules('addr_line_1', lang('address input addr_line_1'), 'trim');
+        $this->form_validation->set_rules('addr_line_2', lang('address input addr_line_2'), 'trim');
+        $this->form_validation->set_rules('city', lang('address input city'), 'required|trim');
+        $this->form_validation->set_rules('country', lang('address input country'), 'required|trim');
 
         if ($this->form_validation->run() == TRUE) {
 
-            $updated = $this->address_model->update($this->input->post());
+            $saved = $this->address_model->update($this->input->post());
 
             // set message
-            if ($updated) {
-                $this->session->set_flashdata('message', 'Contact has been updated');
+            if ($saved) {
+                $this->session->set_flashdata('message', lang('address msg update'));
 
             } else {
-                $this->session->set_flashdata('error', 'There was a problem while saving');
+                $this->session->set_flashdata('error', lang('address error savefail'));
             }
 
             redirect($this->_redirect_url);
         }
 
+        $profile_related = ($this->is_profile_related()) ? 1 : 0;
+
         // setup page header data
-        $this->set_title(lang('contact edit title'));
+        $this->set_title(lang('address edit title'));
 
         $data = $this->includes;
 
         // set content data
         $this->load->model('keyvalues_model'); // prerequisite
-
-
         $content_data = array(
-            'uid' => $_uid,
-            'contact_id' => $id,
-            'contact' => $contact,
-            'redirect' => $this->_redirect_url,
-            'privacies' => $this->keyvalues_model->get_privacy_types(),
-            'contact_types' => $this->keyvalues_model->get_contact_types(),
+            'uid' => $this->_uid,
+            'addr_id' => $id,
+            'profile_related' => $profile_related,
+            'cancel' => $this->_redirect_url,
+            'address' => $address,
+            'addr_types' => $this->keyvalues_model->get_key_values_where_identifier('addr_type'),   // array
         );
 
         // load views
-        $data['content'] = $this->load->view('contact/add', $content_data, TRUE);
+        $data['content'] = $this->load->view('address/add', $content_data, TRUE);
         $this->load->view($this->template, $data);
     }
 
