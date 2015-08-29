@@ -202,14 +202,12 @@ class Address extends Public_Controller
 
     public function index()
     {
-        $logged_in_user = $this->session->userdata('logged_in');
-        $uid = $logged_in_user['id'];
 
-        $contacts = $this->address_model->get_addresses_of_user($uid);
+        $res_data = $this->address_model->get_addresses_of_user($this->_uid);
 
 
         // setup page header data
-        $this->set_title(lang('contact list title'));
+        $this->set_title(lang('address list title'));
 
         $data = $this->includes;
 
@@ -218,10 +216,9 @@ class Address extends Public_Controller
 
 
         $content_data = array(
-            'uid' => $uid,
-            'contacts' => $contacts,
-            'privacies' => $this->keyvalues_model->get_privacy_types(),
-            'contact_types' => $this->keyvalues_model->get_contact_types(),
+            'uid' => $this->_uid,
+            'addresses' => $res_data,
+            'addr_types' => $this->keyvalues_model->get_key_values_where_identifier('addr_type'),
         );
 
         // load views

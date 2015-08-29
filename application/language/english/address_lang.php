@@ -5,6 +5,7 @@
 
 // Titles
 $lang['address title']                  = "My Addresses";
+$lang['address list title']             = "My Addresses";
 $lang['address not exist']              = "Contact do not exist";
 $lang['address id required']            = "Contact ID is required";
 $lang['address add title']              = "Add an Address";
@@ -14,6 +15,8 @@ $lang['address title messages_list']    = "Messages";
 
 // Buttons
 $lang['address button read']            = "Read Message";
+// anchors
+$lang['address a add']            = "Add Address";
 
 // Table Columns
 $lang['address col message_id']         = "ID";
