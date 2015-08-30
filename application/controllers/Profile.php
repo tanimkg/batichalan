@@ -120,9 +120,11 @@ class Profile extends Private_Controller {
             unset($ud['password']);
             unset($ud['salt']);
             unset($ud['validation_code']);
-            $ud['primary_contact']  = $this->contactno_model->get_only_number_by_id($ud['c_contact_id']);
-            $ud['primary_address']  = $this->address_model->get_address_by_id($ud['c_addr_id']);
+            $primary_contact  = $this->contactno_model->get_only_number_by_id($ud['c_contact_id']);
+            $primary_address  = $this->address_model->get_address_by_id($ud['c_addr_id']);
             $ud['sex']  = $this->_get_gender_in_text($ud['gender']);
+            $ud['n_following']  = count($followings);
+            $ud['n_follower']  = count($followers);
 
         }
         else {
@@ -139,7 +141,9 @@ class Profile extends Private_Controller {
         // set content data
         $content_data = array(
             'usr'              => $ud,
+            'primary_contact'    => $primary_contact,
             'other_contacts'    => $other_contacts,
+            'primary_address'   => $primary_address,
             'other_addresses'   => $other_addresses,
             'followings'        => $followings,
             'followers'         => $followers,
