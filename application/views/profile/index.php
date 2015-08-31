@@ -1,3 +1,5 @@
+<?php var_dump($followings); ?>
+<?php var_dump($followers); ?>
 <div class="container">
     <div class="row row-offcanvas row-offcanvas-right">
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">

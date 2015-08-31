@@ -24,9 +24,9 @@ class Users_model extends CI_Model {
 
     function get_username_and_fullname ($id)
     {
-        $sql = $this->db->select('username, first_name, last_name')
-            ->where([$this->_pk => $id, 'deleted' => 0])
-            ->get($this->_db);
+        $this->db->select('username, first_name, last_name');
+        $this->db->where([$this->_pk => $id, 'deleted' => 0, 'status' => 1]);
+        $sql = $this->db->get($this->_db);
         $res = $sql->row_array();
         return $res;
     }

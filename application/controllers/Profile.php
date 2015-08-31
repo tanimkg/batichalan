@@ -217,7 +217,7 @@ class Profile extends Private_Controller {
             // check the id valid
             if ($this->users_model->is_valid($id)) {
                 $res = $this->users_model->get_username_and_fullname($id);
-                $users[] = $res; // settings the type name as key
+                $users[] = $res;
             }
 
         }

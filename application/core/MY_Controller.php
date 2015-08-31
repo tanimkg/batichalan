@@ -452,7 +452,7 @@ class Private_Controller extends MY_Controller {
         }
 
         // prepare theme name
-        $this->settings->theme = strtolower($this->config->item('public_theme'));
+        $this->settings->theme = strtolower($this->config->item('private_theme'));
 
         // set up global header data
 		$this
