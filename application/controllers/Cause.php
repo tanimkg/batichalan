@@ -58,7 +58,7 @@ class Cause extends Private_Controller
         );
 
         // load views
-        $data['content'] = $this->load->view('cause/temp', $content_data, TRUE);
+        $data['content'] = $this->load->view('cause/index', $content_data, TRUE);
         $this->load->view($this->template, $data);
     }
 
@@ -68,8 +68,6 @@ class Cause extends Private_Controller
 
     public function add()
     {
-        // use referer to note whether the address is profile related or not
-
         // validators
         $this->form_validation->set_error_delimiters($this->config->item('error_delimeter_left'), $this->config->item('error_delimeter_right'));
         $this->form_validation->set_rules('addr_line_1', lang('address input addr_line_1'), 'trim');

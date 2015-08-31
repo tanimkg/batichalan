@@ -8,6 +8,13 @@ html {
     font-weight: bold;
 }
 
+body {
+
+    font-family: 'Raleway', Helvetica, sans-serif;
+    font-size: 16px;
+
+}
+
 /* Bootstrap IE10 viewport bug workaround */
 @-webkit-viewport { width: device-width; }
 @-moz-viewport    { width: device-width; }
