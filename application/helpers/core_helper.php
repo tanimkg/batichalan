@@ -202,17 +202,11 @@ if( ! function_exists('csd_to_array'))
     function csd_to_array($val)
     {
         $exploded = explode(',', $val);
-        // convert str into int
-        array_walk($exploded, '_cast_int');
-
-        return $exploded;
-    }
-}
-
-if (! function_exists('_cast_int'))
-{
-    function _cast_int(&$value, $key)
-    {
-        $value = (int) $value;
+        $temp = array();
+        foreach ($exploded as $ex)
+        {
+            $temp[] = intval($ex);
+        }
+        return $temp;
     }
 }

@@ -69,7 +69,7 @@ class Contactno_model extends CI_Model
      * */
     function get_contact_by_id($cid)
     {
-        $q = $this->db->get_where($this->_db, ['contact_id' => $cid, 'deleted' => 0]);
+        $q = $this->db->get_where($this->_db, ['contact_id' => $cid, 'deleted' => '0']);
         if ($q->num_rows())
         {
             return $q->row_array();
@@ -100,7 +100,7 @@ class Contactno_model extends CI_Model
      * */
     function get_contacts_of_user($uid)
     {
-        $q = $this->db->get_where($this->_db, ['created_by_uid' => $uid, 'deleted' => 0]);
+        $q = $this->db->get_where($this->_db, ['created_by_uid' => $uid, 'deleted' => '0']);
         if ($q->num_rows())
         {
             return $q->result();

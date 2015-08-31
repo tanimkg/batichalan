@@ -11,6 +11,8 @@ class Profile extends Private_Controller {
     {
         parent::__construct();
 
+        $this->add_css_theme("profile.css");
+
         // load the language file
         $this->lang->load('users');
 
@@ -111,7 +113,7 @@ class Profile extends Private_Controller {
             $ud = $userdata->row_array();
             // pass con ids array to the private method
             $other_contacts  = $this->_get_other_contacts_of_user(csd_to_array($ud['other_con_ids']));
-            $other_addresses = $this->_get_other_contacts_of_user(csd_to_array($ud['other_addr_ids']));
+            $other_addresses = $this->_get_other_addresses_of_user(csd_to_array($ud['other_addr_ids']));
             //$other_educations = $this->_get_other_contacts_of_user(csd_to_array($ud['edu_ids']));
             $followings = $this->_get_follower_or_following_of_user(csd_to_array($ud['following_uids']));
             $followers  = $this->_get_follower_or_following_of_user(csd_to_array($ud['followed_by_uids']));
@@ -132,6 +134,7 @@ class Profile extends Private_Controller {
             $this->session->set_flashdata('redirect', 'profile/index');
             redirect('login');
         }
+
 
         // setup page header data
         $this->set_title( lang('profile title welcome') );
@@ -156,6 +159,14 @@ class Profile extends Private_Controller {
         $this->load->view($this->template, $data);
     }
 
+
+    public function test()
+    {
+        $ar = array();
+        $res = $this->users_model->get_username_and_fullname(3);
+        $ar[] = $res;
+        var_dump($ar);
+    }
     /**************************************************************************************
      * PRIVATE VALIDATION CALLBACK FUNCTIONS
      **************************************************************************************/
@@ -188,16 +199,16 @@ class Profile extends Private_Controller {
     private function _get_other_addresses_of_user($aids)
     {
         $other_ids = array();
-        $this->load->model('contactno_model');
+        $this->load->model('address_model');
         $this->load->model('keyvalues_model');
         $types = $this->keyvalues_model->get_key_values_where_identifier('addr_type');
 
         foreach ($aids as $aid)
         {
             // check the id valid
-            if ($this->contactno_model->is_valid($aid)) {
-                $con_res = $this->contactno_model->get_contact_by_id($aid);
-                $other_ids[$types[$con_res['addr_type']]] = $con_res; // settings the type name as key
+            if ($this->address_model->is_valid($aid)) {
+                $ad_res = $this->address_model->get_address_by_id($aid);
+                $other_ids[$types[$ad_res['addr_type']]] = $ad_res; // setting the type name as key
             }
 
         }

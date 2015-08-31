@@ -22,20 +22,19 @@ class Users_model extends CI_Model {
     }
 
 
-    function get_username_and_fullname ($id)
+    function get_username_and_fullname($id)
     {
         $this->db->select('username, first_name, last_name');
-        $this->db->where([$this->_pk => $id, 'deleted' => 0, 'status' => 1]);
+        $this->db->where([$this->_pk => $id, 'deleted' => '0', 'status' => '1']);
         $sql = $this->db->get($this->_db);
-        $res = $sql->row_array();
-        return $res;
+        if ($sql->num_rows() > 0) return $sql->row_array();
     }
 
 
     function is_valid($id)
     {
         $sql = $this->db->select('username')
-            ->where([$this->_pk => $id, 'deleted' => 0])
+            ->where([$this->_pk => $id, 'deleted' => '0'])
             ->get($this->_db);
 
         if ($sql->num_rows() > 0) return TRUE;

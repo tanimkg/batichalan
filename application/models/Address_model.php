@@ -96,7 +96,7 @@ class Address_model extends CI_Model
     function get_address_by_id($id)
     {
         $q = $this->db->get_where($this->_db, [$this->_pk => $id]);
-        if ($q->num_rows() > 0) return $q->row_array();
+        if ($q->num_rows() > 0) { return $q->row_array(); }
         return FALSE;
     }
 
@@ -111,4 +111,17 @@ class Address_model extends CI_Model
 
         return FALSE;
     }
+
+
+
+    function is_valid($id)
+    {
+        $q = $this->db->get_where($this->_db, [$this->_pk => $id]);
+
+        if ($q->num_rows() > 0) return TRUE;
+
+        return FALSE;
+    }
+
+
 }
