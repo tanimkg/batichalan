@@ -12,6 +12,7 @@ $cause_addr_post_zip = isset($cause['cause_addr_post_zip']) ? $cause['cause_addr
 
 echo form_open('', array('role'=>'form'));
 
+echo form_hidden('cause_id', $cause_id);
 echo form_hidden('created_by_uid', $uid);
 
 ?>

@@ -94,6 +94,7 @@ class Cause extends Private_Controller
 
         $content_data = array(
             'uid' => $this->_uid,
+            'cause_id' => NULL,    // null in case of new add, int if edit
             'cancel' => $this->_redirect_url,
             'cause' => NULL,
         );
@@ -107,7 +108,7 @@ class Cause extends Private_Controller
     {
         $cause_id = ($id == NULL) ? $this->uri->segment(3) : $id;
         // if user is not the creator of this cause, shoot him up
-        if ( ! $this->cause_model->is_crud_authorized($this->_uid, $id)) redirect($this->_redirect_url);
+        if ( ! $this->cause_model->is_crud_authorized($this->_uid, $cause_id)) redirect($this->_redirect_url);
 
         // validators
         if ($this->validate_form_step_2() == TRUE) {
@@ -148,7 +149,7 @@ class Cause extends Private_Controller
         $cause_id = ($id == NULL) ? $this->uri->segment(3) : $id;
 
         // if user is not the creator of this cause, shoot him up
-        if ( ! $this->cause_model->is_crud_authorized($this->_uid, $id)) redirect($this->_redirect_url);
+        if ( ! $this->cause_model->is_crud_authorized($this->_uid, $cause_id)) redirect($this->_redirect_url);
 
         // validators
         if ($this->validate_form_step_3() == TRUE) {
@@ -232,62 +233,48 @@ class Cause extends Private_Controller
 
     public function edit($id = NULL)
     {
+        $cause_id = (($id == NULL) OR ($this->uri->segment(3))) ? $this->uri->segment(3) : NULL;
+
+        // declare $cause = Null, if something is there it will be changed midway
+        $cause = NULL;
+
         // make sure we have a numeric id
-        if (is_null($id) OR !is_numeric($id)) {
-            redirect($this->_redirect_url);
+        if ( !is_null($id) OR is_numeric($id)) {
+            // if user is not the creator of this cause, shoot him up
+            if ( ! $this->cause_model->is_crud_authorized($this->_uid, $id)) redirect($this->_redirect_url);
+            $cause = $this->cause_model->get_cause_by_id($cause_id);
         }
 
-        // get the data
-        $address = $this->cause_model->get_address_by_id($id);
-
-        // if empty results, return to list
-        if (!$address) {
-            redirect($this->_redirect_url);
-        }
-
-        // check whether user owns the address or anyhow associated with it. Otherwise do not let user edit
-        //$_cid = $this->uri->segment(3, NULL);  // if segment fails/does not exist then return NULL
-        if (!$this->cause_model->check_address_belongs_to_user($this->_uid, $id)) {
-
-            $this->session->set_flashdata('error', lang('contact edit error'));
-            redirect($this->_redirect_url);
-        }
-
-        if ($this->validate_form() == TRUE) {
+        // validators
+        if ($this->validate_form_step_1() == TRUE) {
 
             $saved = $this->cause_model->update($this->input->post());
 
             // set message
             if ($saved) {
-                $this->session->set_flashdata('message', lang('cause msg update'));
+                $this->session->set_flashdata('message', lang('cause m saved'));
 
             } else {
-                $this->session->set_flashdata('error', lang('cause error savefail'));
+                $this->session->set_flashdata('error', lang('core error save'));
             }
-
+            $this->_redirect_url = base_url('cause/edit_step_2/' . $saved);
             redirect($this->_redirect_url);
         }
-
-        $profile_related = ($this->is_profile_related()) ? 1 : 0;
 
         // setup page header data
         $this->set_title(lang('cause edit title'));
 
         $data = $this->includes;
 
-        // set content data
-        $this->load->model('keyvalues_model'); // prerequisite
         $content_data = array(
             'uid' => $this->_uid,
-            'addr_id' => $id,
-            'profile_related' => $profile_related,
+            'cause_id' => $cause_id,    // null in case of new add, int if edit
             'cancel' => $this->_redirect_url,
-            'cause' => $address,
-            'addr_types' => $this->keyvalues_model->get_key_values_where_identifier('addr_type'),   // array
+            'cause' => $cause,
         );
 
         // load views
-        $data['content'] = $this->load->view('cause/add', $content_data, TRUE);
+        $data['content'] = $this->load->view('cause/add_step_1', $content_data, TRUE);
         $this->load->view($this->template, $data);
     }
 
@@ -320,6 +307,7 @@ class Cause extends Private_Controller
 
     public function view( $id = NULL )
     {
+
     }
 
 

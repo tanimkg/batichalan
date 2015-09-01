@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9ba5edbe-b81b-4692-b393-1fa7c16770f1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/views/cause/add_step_3.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/Cause.php" afterPath="$PROJECT_DIR$/application/controllers/Cause.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/language/english/cause_lang.php" afterPath="$PROJECT_DIR$/application/language/english/cause_lang.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/cause/add_step_1.php" afterPath="$PROJECT_DIR$/application/views/cause/add_step_1.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ci3_fire.iws" />
@@ -27,14 +26,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Cause.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Cause.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/controllers/Cause.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-28.346153">
-              <caret line="320" column="37" selection-start-line="320" selection-start-column="37" selection-end-line="320" selection-end-column="37" />
+            <state vertical-scroll-proportion="-0.2987013">
+              <caret line="264" column="41" selection-start-line="264" selection-start-column="41" selection-end-line="264" selection-end-column="41" />
               <folding>
                 <element signature="n#add#0;n#Cause#0;n#!!top" expanded="false" />
-                <element signature="n#edit#0;n#Cause#0;n#!!top" expanded="false" />
                 <element signature="n#index#0;n#Cause#0;n#!!top" expanded="false" />
                 <element signature="n#validate_form_step_1#0;n#Cause#0;n#!!top" expanded="false" />
                 <element signature="n#validate_form_step_2#0;n#Cause#0;n#!!top" expanded="false" />
@@ -43,11 +41,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="add_step_3.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/views/cause/add_step_3.php">
+      <file leaf-file-name="add_step_1.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/cause/add_step_1.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.2244898">
-              <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+            <state vertical-scroll-proportion="7.6923075">
+              <caret line="14" column="38" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -68,26 +66,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-5.3846154">
               <caret line="22" column="70" selection-start-line="22" selection-start-column="70" selection-end-line="22" selection-end-column="70" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="add.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/cause/add.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-18.423077">
-              <caret line="41" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="add_step_2.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/cause/add_step_2.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="21.538462">
-              <caret line="38" column="94" selection-start-line="38" selection-start-column="94" selection-end-line="38" selection-end-column="94" />
               <folding />
             </state>
           </provider>
@@ -144,12 +122,12 @@
         <option value="$PROJECT_DIR$/application/views/address/confirm_id.php" />
         <option value="$PROJECT_DIR$/application/views/cause/add.php" />
         <option value="$PROJECT_DIR$/application/language/english/core_lang.php" />
-        <option value="$PROJECT_DIR$/application/views/cause/add_step_1.php" />
         <option value="$PROJECT_DIR$/application/models/Cause_model.php" />
         <option value="$PROJECT_DIR$/application/views/cause/add_step_2.php" />
         <option value="$PROJECT_DIR$/application/language/english/cause_lang.php" />
-        <option value="$PROJECT_DIR$/application/controllers/Cause.php" />
         <option value="$PROJECT_DIR$/application/views/cause/add_step_3.php" />
+        <option value="$PROJECT_DIR$/application/views/cause/add_step_1.php" />
+        <option value="$PROJECT_DIR$/application/controllers/Cause.php" />
       </list>
     </option>
   </component>
@@ -543,7 +521,13 @@
       <option name="project" value="LOCAL" />
       <updated>1441131724655</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Cause/add_step_3 implemented">
+      <created>1441132390990</created>
+      <option name="number" value="00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1441132390990</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -554,9 +538,9 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20637329" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20637329" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22610015" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22610015" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32885906" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32885906" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -594,10 +578,13 @@
     <MESSAGE value="Profile/index complete, working on cause/add view" />
     <MESSAGE value="Cause/add_step_1 implemented" />
     <MESSAGE value="Cause/add_step_2 implemented" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cause/add_step_2 implemented" />
+    <MESSAGE value="Cause/add_step_3 implemented" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cause/add_step_3 implemented" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="2" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -926,14 +913,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/cause/add_step_1.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.769231">
-          <caret line="14" column="41" selection-start-line="14" selection-start-column="41" selection-end-line="14" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/cause/add.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-18.423077">
@@ -966,25 +945,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Cause.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-28.346153">
-          <caret line="320" column="37" selection-start-line="320" selection-start-column="37" selection-end-line="320" selection-end-column="37" />
-          <folding>
-            <element signature="n#add#0;n#Cause#0;n#!!top" expanded="false" />
-            <element signature="n#edit#0;n#Cause#0;n#!!top" expanded="false" />
-            <element signature="n#index#0;n#Cause#0;n#!!top" expanded="false" />
-            <element signature="n#validate_form_step_1#0;n#Cause#0;n#!!top" expanded="false" />
-            <element signature="n#validate_form_step_2#0;n#Cause#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/cause/add_step_3.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.2244898">
           <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/cause/add_step_1.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="7.6923075">
+          <caret line="14" column="38" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Cause.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.2987013">
+          <caret line="264" column="41" selection-start-line="264" selection-start-column="41" selection-end-line="264" selection-end-column="41" />
+          <folding>
+            <element signature="n#add#0;n#Cause#0;n#!!top" expanded="false" />
+            <element signature="n#index#0;n#Cause#0;n#!!top" expanded="false" />
+            <element signature="n#validate_form_step_1#0;n#Cause#0;n#!!top" expanded="false" />
+            <element signature="n#validate_form_step_2#0;n#Cause#0;n#!!top" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
