@@ -20,6 +20,7 @@ $lang['cause input to_apt']          = "To the Designation Your Cause Should Dra
 $lang['cause input to_name']          = "And/Or the Name Your Cause is Addressed to";
 $lang['cause input to_sec']          = "Section/Department";
 $lang['cause input to_org']          = "Organization";
+$lang['cause input tags']          = "Tags (Seperate tags using comma)";
 
 $lang['cause input cause_addr_line']             = "Address Line of Your Cause Location";
 $lang['cause input cause_addr_area']             = "Area of Your Cause Location";

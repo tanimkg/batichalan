@@ -151,7 +151,7 @@ class Cause extends Private_Controller
         if ( ! $this->cause_model->is_crud_authorized($this->_uid, $id)) redirect($this->_redirect_url);
 
         // validators
-        if ($this->validate_form_step_2() == TRUE) {
+        if ($this->validate_form_step_3() == TRUE) {
 
             $saved = $this->cause_model->update($this->input->post());
 
@@ -318,7 +318,7 @@ class Cause extends Private_Controller
         $this->load->view($this->template, $data);
     }
 
-    public function view()
+    public function view( $id = NULL )
     {
     }
 
@@ -356,6 +356,19 @@ class Cause extends Private_Controller
         $this->form_validation->set_rules('to_sec', lang('cause input to_sec'), 'trim');
         $this->form_validation->set_rules('to_org', lang('cause input to_org'), 'required|trim');
         $this->form_validation->set_rules('cause_id', 'Cause ID', 'required|numeric');
+
+        if ($this->form_validation->run() == TRUE) return TRUE;
+
+        return FALSE;
+    }
+
+    private function validate_form_step_3()
+    {
+        // validators
+        $this->form_validation->set_error_delimiters($this->config->item('error_delimeter_left'), $this->config->item('error_delimeter_right'));
+
+        $this->form_validation->set_rules('tags', lang('cause input tags'), 'trim');
+
 
         if ($this->form_validation->run() == TRUE) return TRUE;
 
