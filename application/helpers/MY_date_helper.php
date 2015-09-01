@@ -71,5 +71,6 @@ if ( ! function_exists('timezones'))
         }
 
         return isset($zones[$tz]) ? $zones[$tz] : 0;
+
     }
 }

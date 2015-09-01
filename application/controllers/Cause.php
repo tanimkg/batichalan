@@ -307,7 +307,55 @@ class Cause extends Private_Controller
 
     public function view( $id = NULL )
     {
+        $cause_id = (($id == NULL) OR ($this->uri->segment(3))) ? $this->uri->segment(3) : NULL;
 
+        // make sure we have a numeric id
+        if ( !is_null($id) OR is_numeric($id)) {
+            $cause = $this->cause_model->get_cause_by_id($cause_id);
+        }
+
+        // setup page header data
+        $this->set_title($cause['cause_title']);
+
+        $data = $this->includes;
+
+        $content_data = array(
+            'uid' => $this->_uid,
+            'cause_id' => $cause_id,
+            'cause' => $cause,
+        );
+
+        // load views
+        $data['content'] = $this->load->view('cause/view', $content_data, TRUE);
+        $this->load->view($this->template, $data);
+    }
+
+    // TODO: Not implemented yet
+    public function supporters($id = NULL)
+    {
+        $cause_id = (($id == NULL) OR ($this->uri->segment(3))) ? $this->uri->segment(3) : NULL;
+
+        // make sure we have a numeric id
+        if ( !is_null($id) OR is_numeric($id)) {
+            $cause = $this->cause_model->get_cause_by_id($cause_id);
+
+
+        }
+
+        // setup page header data
+        $this->set_title($cause['cause_title']);
+
+        $data = $this->includes;
+
+        $content_data = array(
+            'uid' => $this->_uid,
+            'cause_id' => $cause_id,
+            'cause' => $cause,
+        );
+
+        // load views
+        $data['content'] = $this->load->view('cause/view', $content_data, TRUE);
+        $this->load->view($this->template, $data);
     }
 
 
