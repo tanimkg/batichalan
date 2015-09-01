@@ -62,7 +62,9 @@ class Cause_model extends CI_Model
         unset($post_values[$this->_pk]);
 
         // now update where primary key is temp pk (recorded avobe)
-        if ($this->db->update($this->_db, $post_values, [$this->_pk => $_update_id])) return TRUE;
+        if ($this->db->update($this->_db, $post_values, [$this->_pk => $_update_id])) {
+            return $_update_id;
+        }
 
         return FALSE;
     }
@@ -90,10 +92,10 @@ class Cause_model extends CI_Model
     }
 
     /*
-     * @params int User ID
+     * @params int
      * @return array| bool
      * */
-    function get_address_by_id($id)
+    function get_cause_by_id($id)
     {
         $q = $this->db->get_where($this->_db, [$this->_pk => $id]);
         if ($q->num_rows() > 0) return $q->row_array();

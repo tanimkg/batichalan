@@ -16,8 +16,10 @@ $lang['cause button read']            = "Read Message";
 // Form Inputs
 $lang['cause input cause_title']             = "Headline of Your Cause";
 $lang['cause input cause_desc']             = "Description of Your Cause";
-$lang['cause input privacy']          = "Privacy";
-$lang['cause input no']               = "Number or ID";
+$lang['cause input to_apt']          = "To the Designation Your Cause Should Draw Attention";
+$lang['cause input to_name']          = "And/Or the Name Your Cause is Addressed to";
+$lang['cause input to_sec']          = "Section/Department";
+$lang['cause input to_org']          = "Organization";
 
 $lang['cause input cause_addr_line']             = "Address Line of Your Cause Location";
 $lang['cause input cause_addr_area']             = "Area of Your Cause Location";
@@ -26,12 +28,19 @@ $lang['cause input cause_addr_state']             = "State";
 $lang['cause input cause_addr_country']             = "Country";
 $lang['cause input cause_addr_post_zip']             = "Post/Zip";
 
+$lang['cause input to_addr_line']             = "Address Line of the Organization";
+$lang['cause input to_addr_area']             = "Area";
+$lang['cause input to_addr_city']             = "City";
+$lang['cause input to_addr_state']             = "State";
+$lang['cause input to_addr_country']             = "Country";
+$lang['cause input to_addr_post_zip']             = "Post/Zip";
+
 
 
 // Messages
 $lang['cause m saved']       = "Your cause is created. Now edit details";
-$lang['cause msg update']            = 'Address has been updated';
-$lang['cause msg deleted']            = 'Address has been deleted';
+$lang['cause m updated']            = 'Cause details has been updated';
+$lang['cause m deleted']            = 'Cause has been deleted';
 
 // Errors
 $lang['cause error belong']          = 'You cannot delete an cause which you did not create';

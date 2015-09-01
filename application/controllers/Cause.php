@@ -83,7 +83,7 @@ class Cause extends Private_Controller
             } else {
                 $this->session->set_flashdata('error', lang('core error save'));
             }
-            $this->_redirect_url = base_url('cause/add_step_2/' . $saved);
+            $this->_redirect_url = base_url('cause/edit_step_2/' . $saved);
             redirect($this->_redirect_url);
         }
 
@@ -103,10 +103,10 @@ class Cause extends Private_Controller
         $this->load->view($this->template, $data);
     }
 
-    public function add_step_2( $id = NULL )
+    public function edit_step_2( $id = NULL )
     {
         $cause_id = ($id == NULL) ? $this->uri->segment(3) : $id;
-
+        // if user is not the creator of this cause, shoot him up
         if ( ! $this->cause_model->is_crud_authorized($this->_uid, $id)) redirect($this->_redirect_url);
 
         // validators
@@ -116,35 +116,71 @@ class Cause extends Private_Controller
 
             // set message
             if ($saved) {
-                $this->session->set_flashdata('message', lang('cause m saved'));
+                $this->session->set_flashdata('message', lang('cause m updated'));
 
             } else {
                 $this->session->set_flashdata('error', lang('core error save'));
             }
-            $this->_redirect_url = base_url('cause/add_step_2/' . $saved);
+            $this->_redirect_url = base_url('cause/edit_step_3/' . $saved);
             redirect($this->_redirect_url);
         }
 
         // setup page header data
-        $this->set_title(lang('cause add title'));
+        $this->set_title(lang('cause edit title'));
 
         $data = $this->includes;
 
         $content_data = array(
             'uid' => $this->_uid,
+            'cause_id' => $cause_id,
             'cancel' => $this->_redirect_url,
-            'cause' => NULL,
+            'cause' => $this->cause_model->get_cause_by_id($cause_id),
         );
 
         // load views
-        $data['content'] = $this->load->view('cause/add_step_1', $content_data, TRUE);
+        $data['content'] = $this->load->view('cause/add_step_2', $content_data, TRUE);
         $this->load->view($this->template, $data);
-
 
     }
 
-    public function add_step_3()
+    public function edit_step_3($id = NULL)
     {
+        $cause_id = ($id == NULL) ? $this->uri->segment(3) : $id;
+
+        // if user is not the creator of this cause, shoot him up
+        if ( ! $this->cause_model->is_crud_authorized($this->_uid, $id)) redirect($this->_redirect_url);
+
+        // validators
+        if ($this->validate_form_step_2() == TRUE) {
+
+            $saved = $this->cause_model->update($this->input->post());
+
+            // set message
+            if ($saved) {
+                $this->session->set_flashdata('message', lang('cause m updated'));
+
+            } else {
+                $this->session->set_flashdata('error', lang('core error save'));
+            }
+            $this->_redirect_url = base_url('cause/view/' . $saved);
+            redirect($this->_redirect_url);
+        }
+
+        // setup page header data
+        $this->set_title(lang('cause edit title'));
+
+        $data = $this->includes;
+
+        $content_data = array(
+            'uid' => $this->_uid,
+            'cause_id' => $cause_id,
+            'cancel' => $this->_redirect_url,
+            'cause' => $this->cause_model->get_cause_by_id($cause_id),
+        );
+
+        // load views
+        $data['content'] = $this->load->view('cause/add_step_3', $content_data, TRUE);
+        $this->load->view($this->template, $data);
     }
 
 
@@ -298,24 +334,28 @@ class Cause extends Private_Controller
         $this->form_validation->set_rules('cause_addr_country', lang('cause input cause_addr_country'), 'required|trim');
 
         $this->form_validation->set_rules('cause_title', lang('cause input cause_title'), 'required|trim');
-        $this->form_validation->set_rules('cause_title', lang('cause input cause_title'), 'required|trim');
+        $this->form_validation->set_rules('cause_desc', lang('cause input cause_desc'), 'required|trim');
 
         if ($this->form_validation->run() == TRUE) return TRUE;
 
         return FALSE;
     }
 
-    private function validate_form()
+    private function validate_form_step_2()
     {
         // validators
         $this->form_validation->set_error_delimiters($this->config->item('error_delimeter_left'), $this->config->item('error_delimeter_right'));
-        $this->form_validation->set_rules('addr_line_1', lang('cause input addr_line_1'), 'trim');
-        $this->form_validation->set_rules('addr_line_2', lang('cause input addr_line_2'), 'trim');
-        $this->form_validation->set_rules('city', lang('cause input city'), 'required|trim');
-        $this->form_validation->set_rules('country', lang('cause input country'), 'required|trim');
+        $this->form_validation->set_rules('to_addr_line', lang('cause input addr_line_1'), 'trim');
+        $this->form_validation->set_rules('to_addr_area', lang('cause input to_addr_area'), 'trim');
+        $this->form_validation->set_rules('to_addr_city', lang('cause input to_addr_city'), 'required|trim');
+        $this->form_validation->set_rules('to_addr_state', lang('cause input to_addr_state'), 'trim');
+        $this->form_validation->set_rules('to_addr_country', lang('cause input to_addr_country'), 'required|trim');
 
-        $this->form_validation->set_rules('cause_title', lang('cause input cause_title'), 'required|trim');
-        $this->form_validation->set_rules('cause_title', lang('cause input cause_title'), 'required|trim');
+        $this->form_validation->set_rules('to_apt', lang('cause input to_apt'), 'trim');
+        $this->form_validation->set_rules('to_name', lang('cause input to_name'), 'trim');
+        $this->form_validation->set_rules('to_sec', lang('cause input to_sec'), 'trim');
+        $this->form_validation->set_rules('to_org', lang('cause input to_org'), 'required|trim');
+        $this->form_validation->set_rules('cause_id', 'Cause ID', 'required|numeric');
 
         if ($this->form_validation->run() == TRUE) return TRUE;
 
