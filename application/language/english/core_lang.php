@@ -36,3 +36,4 @@ $lang['UM75']	                         	= "(UTC -7:00) Arizona Time";
 
 // Errors
 $lang['core error no_results']              = "No results found!";
+$lang['core error save']              = "There was a problem while saving. Please try again.";

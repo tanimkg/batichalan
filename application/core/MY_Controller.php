@@ -40,10 +40,12 @@ class MY_Controller extends CI_Controller {
 					"//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css",
 					"//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css",
 					"//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css",
-					"/themes/core/css/core.css"
+					"/themes/core/css/core.css",
+					"/themes/core/css/bootstrap.min.css",
 				))
 			->add_external_js(
 				array(
+					"/themes/core/js/jquery-2.1.4.min.js",
 					"//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js",
 					"//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"
 				));

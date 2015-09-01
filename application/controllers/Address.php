@@ -56,18 +56,58 @@ class Address extends Public_Controller
      * PUBLIC FUNCTIONS
      **************************************************************************************/
 
+    public function add_and_return_id()
+    {
+        // validators
+        if ($this->validate_form() == TRUE) {
+
+            $saved = $this->address_model->add($this->input->post());
+
+            // set message
+            if ($saved) {
+                $this->session->set_flashdata('message', 'Address has been saved');
+
+                // saved now view a success view page and let user unknowingly transfer the addr_id to the original
+                // form via jQuery| var saved holds the id
+
+                $data['addr_id'] = $saved;
+
+                $this->load->view('address/confirm_id', $data);
+            } else {
+                $this->session->set_flashdata('error', 'There was a problem while saving');
+            }
+
+            //redirect($this->_redirect_url);
+        }
+
+        // setup page header data
+        $this->set_title(lang('address add title'));
+
+        $data = $this->includes;
+
+        // set content data
+        $this->load->model('keyvalues_model'); // prerequisite
+
+        $profile_related = ($this->is_profile_related()) ? 1 : 0;
+
+        $content_data = array(
+            'uid' => $this->_uid,
+            'addr_id' => NULL,
+            'cancel' => $this->_redirect_url,
+            'address' => NULL,
+            'addr_types' => $this->keyvalues_model->get_key_values_where_identifier('addr_type'),
+        );
+
+        // load views
+        $data['content'] = $this->load->view('address/add', $content_data, TRUE);
+        $this->load->view($this->template, $data);
+    }
     public function add()
     {
         // use referer to note whether the address is profile related or not
 
         // validators
-        $this->form_validation->set_error_delimiters($this->config->item('error_delimeter_left'), $this->config->item('error_delimeter_right'));
-        $this->form_validation->set_rules('addr_line_1', lang('address input addr_line_1'), 'trim');
-        $this->form_validation->set_rules('addr_line_2', lang('address input addr_line_2'), 'trim');
-        $this->form_validation->set_rules('city', lang('address input city'), 'required|trim');
-        $this->form_validation->set_rules('country', lang('address input country'), 'required|trim');
-
-        if ($this->form_validation->run() == TRUE) {
+        if ($this->validate_form() == TRUE) {
 
             $saved = $this->address_model->add($this->input->post());
 
@@ -106,6 +146,19 @@ class Address extends Public_Controller
         $this->load->view($this->template, $data);
     }
 
+    private function validate_form()
+    {
+        // validators
+        $this->form_validation->set_error_delimiters($this->config->item('error_delimeter_left'), $this->config->item('error_delimeter_right'));
+        $this->form_validation->set_rules('addr_line_1', lang('address input addr_line_1'), 'trim');
+        $this->form_validation->set_rules('addr_line_2', lang('address input addr_line_2'), 'trim');
+        $this->form_validation->set_rules('city', lang('address input city'), 'required|trim');
+        $this->form_validation->set_rules('country', lang('address input country'), 'required|trim');
+
+        if ($this->form_validation->run() == TRUE) return TRUE;
+
+        return FALSE;
+    }
 
     private function is_profile_related()
     {
@@ -147,13 +200,8 @@ class Address extends Public_Controller
         }
 
         // validators
-        $this->form_validation->set_error_delimiters($this->config->item('error_delimeter_left'), $this->config->item('error_delimeter_right'));
-        $this->form_validation->set_rules('addr_line_1', lang('address input addr_line_1'), 'trim');
-        $this->form_validation->set_rules('addr_line_2', lang('address input addr_line_2'), 'trim');
-        $this->form_validation->set_rules('city', lang('address input city'), 'required|trim');
-        $this->form_validation->set_rules('country', lang('address input country'), 'required|trim');
 
-        if ($this->form_validation->run() == TRUE) {
+        if ($this->validate_form() == TRUE) {
 
             $saved = $this->address_model->update($this->input->post());
 

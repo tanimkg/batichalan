@@ -18,15 +18,15 @@ class Cause_model extends CI_Model
         parent::__construct();
 
         // define primary table
-        $this->_db = 'addresses';
-        $this->_pk = 'addr_id';
+        $this->_db = 'causes';
+        $this->_pk = 'cause_id';
     }
 
     /*
          * @params array
          * @return int|bool
          * */
-    function add($post_values)
+    function add_step_1($post_values)
     {
         // strip submit key from the array
         unset($post_values['submit']);
@@ -35,6 +35,17 @@ class Cause_model extends CI_Model
 
         if ($this->db->affected_rows() > 0) return $this->db->insert_id();
 
+        return FALSE;
+    }
+
+
+    public function is_crud_authorized($uid, $cause_id)
+    {
+        $q = $this->db->get_where($this->_db, [$this->_pk => $cause_id, 'created_by_uid' => $uid]);
+        if ($q->num_rows() > 0)
+        {
+            return TRUE;
+        }
         return FALSE;
     }
 
@@ -70,23 +81,12 @@ class Cause_model extends CI_Model
         return FALSE;
     }
 
-    function get_addresses_of_user($uid)
+    function get_causes_of_user($uid)
     {
         $q = $this->db->get_where($this->_db, ['created_by_uid' => $uid]);
         if ($q->num_rows()) {
             return $q->result();
         }
-    }
-
-
-    function get_formatted_addr_by_id($id)
-    {
-        $q = $this->get_address_by_id($id);
-        $text = $q['addr_line_1'] . ', '
-                .$q['addr_line_2'] . ', '
-                .$q['city'] . ', '
-                .$q['state'] . ', '
-                .$q['country'];
     }
 
     /*

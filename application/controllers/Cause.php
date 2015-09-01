@@ -1,5 +1,8 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * Class Cause
+ */
 class Cause extends Private_Controller
 {
 
@@ -66,18 +69,93 @@ class Cause extends Private_Controller
      * PUBLIC FUNCTIONS
      **************************************************************************************/
 
-    public function add()
+    public function add_step_1()
     {
         // validators
-        $this->form_validation->set_error_delimiters($this->config->item('error_delimeter_left'), $this->config->item('error_delimeter_right'));
-        $this->form_validation->set_rules('addr_line_1', lang('address input addr_line_1'), 'trim');
-        $this->form_validation->set_rules('addr_line_2', lang('address input addr_line_2'), 'trim');
-        $this->form_validation->set_rules('city', lang('address input city'), 'required|trim');
-        $this->form_validation->set_rules('country', lang('address input country'), 'required|trim');
+        if ($this->validate_form_step_1() == TRUE) {
 
-        if ($this->form_validation->run() == TRUE) {
+            $saved = $this->cause_model->add_step_1($this->input->post());
 
-            $saved = $this->address_model->add($this->input->post());
+            // set message
+            if ($saved) {
+                $this->session->set_flashdata('message', lang('cause m saved'));
+
+            } else {
+                $this->session->set_flashdata('error', lang('core error save'));
+            }
+            $this->_redirect_url = base_url('cause/add_step_2/' . $saved);
+            redirect($this->_redirect_url);
+        }
+
+        // setup page header data
+        $this->set_title(lang('cause add title'));
+
+        $data = $this->includes;
+
+        $content_data = array(
+            'uid' => $this->_uid,
+            'cancel' => $this->_redirect_url,
+            'cause' => NULL,
+        );
+
+        // load views
+        $data['content'] = $this->load->view('cause/add_step_1', $content_data, TRUE);
+        $this->load->view($this->template, $data);
+    }
+
+    public function add_step_2( $id = NULL )
+    {
+        $cause_id = ($id == NULL) ? $this->uri->segment(3) : $id;
+
+        if ( ! $this->cause_model->is_crud_authorized($this->_uid, $id)) redirect($this->_redirect_url);
+
+        // validators
+        if ($this->validate_form_step_2() == TRUE) {
+
+            $saved = $this->cause_model->update($this->input->post());
+
+            // set message
+            if ($saved) {
+                $this->session->set_flashdata('message', lang('cause m saved'));
+
+            } else {
+                $this->session->set_flashdata('error', lang('core error save'));
+            }
+            $this->_redirect_url = base_url('cause/add_step_2/' . $saved);
+            redirect($this->_redirect_url);
+        }
+
+        // setup page header data
+        $this->set_title(lang('cause add title'));
+
+        $data = $this->includes;
+
+        $content_data = array(
+            'uid' => $this->_uid,
+            'cancel' => $this->_redirect_url,
+            'cause' => NULL,
+        );
+
+        // load views
+        $data['content'] = $this->load->view('cause/add_step_1', $content_data, TRUE);
+        $this->load->view($this->template, $data);
+
+
+    }
+
+    public function add_step_3()
+    {
+    }
+
+
+
+    public function add()
+    {
+
+        // validators
+        if ($this->validate_form() == TRUE) {
+
+            $saved = $this->cause_model->add($this->input->post());
 
             // set message
             if ($saved) {
@@ -91,7 +169,7 @@ class Cause extends Private_Controller
         }
 
         // setup page header data
-        $this->set_title(lang('address add title'));
+        $this->set_title(lang('cause add title'));
 
         $data = $this->includes;
 
@@ -105,30 +183,15 @@ class Cause extends Private_Controller
             'addr_id' => NULL,
             'profile_related' => $profile_related,
             'cancel' => $this->_redirect_url,
-            'address' => NULL,
+            'cause' => NULL,
             'addr_types' => $this->keyvalues_model->get_key_values_where_identifier('addr_type'),
         );
 
         // load views
-        $data['content'] = $this->load->view('address/add', $content_data, TRUE);
+        $data['content'] = $this->load->view('cause/add', $content_data, TRUE);
         $this->load->view($this->template, $data);
     }
 
-
-    private function is_profile_related()
-    {
-        $this->load->library('user_agent');  // load user agent library
-        // save the redirect_back data from referral url (where user first was prior to login)
-        $this->session->set_userdata('redirect_back', $this->agent->referrer());
-
-        // split at /, if referrer url does not contain 'profile', then it is not profile related
-        // so set profile related to 0
-        $_dirty = explode('/', $this->session->userdata('redirect_back'));
-        $profile_related = FALSE;
-        if (in_array('profile', $_dirty) || in_array('dashboard', $_dirty)) $profile_related = TRUE;
-
-        return $profile_related;
-    }
 
 
     public function edit($id = NULL)
@@ -139,7 +202,7 @@ class Cause extends Private_Controller
         }
 
         // get the data
-        $address = $this->address_model->get_address_by_id($id);
+        $address = $this->cause_model->get_address_by_id($id);
 
         // if empty results, return to list
         if (!$address) {
@@ -148,29 +211,22 @@ class Cause extends Private_Controller
 
         // check whether user owns the address or anyhow associated with it. Otherwise do not let user edit
         //$_cid = $this->uri->segment(3, NULL);  // if segment fails/does not exist then return NULL
-        if (!$this->address_model->check_address_belongs_to_user($this->_uid, $id)) {
+        if (!$this->cause_model->check_address_belongs_to_user($this->_uid, $id)) {
 
             $this->session->set_flashdata('error', lang('contact edit error'));
             redirect($this->_redirect_url);
         }
 
-        // validators
-        $this->form_validation->set_error_delimiters($this->config->item('error_delimeter_left'), $this->config->item('error_delimeter_right'));
-        $this->form_validation->set_rules('addr_line_1', lang('address input addr_line_1'), 'trim');
-        $this->form_validation->set_rules('addr_line_2', lang('address input addr_line_2'), 'trim');
-        $this->form_validation->set_rules('city', lang('address input city'), 'required|trim');
-        $this->form_validation->set_rules('country', lang('address input country'), 'required|trim');
+        if ($this->validate_form() == TRUE) {
 
-        if ($this->form_validation->run() == TRUE) {
-
-            $saved = $this->address_model->update($this->input->post());
+            $saved = $this->cause_model->update($this->input->post());
 
             // set message
             if ($saved) {
-                $this->session->set_flashdata('message', lang('address msg update'));
+                $this->session->set_flashdata('message', lang('cause msg update'));
 
             } else {
-                $this->session->set_flashdata('error', lang('address error savefail'));
+                $this->session->set_flashdata('error', lang('cause error savefail'));
             }
 
             redirect($this->_redirect_url);
@@ -179,7 +235,7 @@ class Cause extends Private_Controller
         $profile_related = ($this->is_profile_related()) ? 1 : 0;
 
         // setup page header data
-        $this->set_title(lang('address edit title'));
+        $this->set_title(lang('cause edit title'));
 
         $data = $this->includes;
 
@@ -190,12 +246,12 @@ class Cause extends Private_Controller
             'addr_id' => $id,
             'profile_related' => $profile_related,
             'cancel' => $this->_redirect_url,
-            'address' => $address,
+            'cause' => $address,
             'addr_types' => $this->keyvalues_model->get_key_values_where_identifier('addr_type'),   // array
         );
 
         // load views
-        $data['content'] = $this->load->view('address/add', $content_data, TRUE);
+        $data['content'] = $this->load->view('cause/add', $content_data, TRUE);
         $this->load->view($this->template, $data);
     }
 
@@ -203,11 +259,11 @@ class Cause extends Private_Controller
     public function index()
     {
 
-        $res_data = $this->address_model->get_addresses_of_user($this->_uid);
+        $res_data = $this->cause_model->get_addresses_of_user($this->_uid);
 
 
         // setup page header data
-        $this->set_title(lang('address list title'));
+        $this->set_title(lang('cause list title'));
 
         $data = $this->includes;
 
@@ -222,7 +278,7 @@ class Cause extends Private_Controller
         );
 
         // load views
-        $data['content'] = $this->load->view('address/index', $content_data, TRUE);
+        $data['content'] = $this->load->view('cause/index', $content_data, TRUE);
         $this->load->view($this->template, $data);
     }
 
@@ -230,8 +286,44 @@ class Cause extends Private_Controller
     {
     }
 
+
+    private function validate_form_step_1()
+    {
+        // validators
+        $this->form_validation->set_error_delimiters($this->config->item('error_delimeter_left'), $this->config->item('error_delimeter_right'));
+        $this->form_validation->set_rules('cause_addr_line', lang('cause input addr_line_1'), 'trim');
+        $this->form_validation->set_rules('cause_addr_area', lang('cause input cause_addr_area'), 'trim');
+        $this->form_validation->set_rules('cause_addr_city', lang('cause input cause_addr_city'), 'required|trim');
+        $this->form_validation->set_rules('cause_addr_state', lang('cause input cause_addr_state'), 'trim');
+        $this->form_validation->set_rules('cause_addr_country', lang('cause input cause_addr_country'), 'required|trim');
+
+        $this->form_validation->set_rules('cause_title', lang('cause input cause_title'), 'required|trim');
+        $this->form_validation->set_rules('cause_title', lang('cause input cause_title'), 'required|trim');
+
+        if ($this->form_validation->run() == TRUE) return TRUE;
+
+        return FALSE;
+    }
+
+    private function validate_form()
+    {
+        // validators
+        $this->form_validation->set_error_delimiters($this->config->item('error_delimeter_left'), $this->config->item('error_delimeter_right'));
+        $this->form_validation->set_rules('addr_line_1', lang('cause input addr_line_1'), 'trim');
+        $this->form_validation->set_rules('addr_line_2', lang('cause input addr_line_2'), 'trim');
+        $this->form_validation->set_rules('city', lang('cause input city'), 'required|trim');
+        $this->form_validation->set_rules('country', lang('cause input country'), 'required|trim');
+
+        $this->form_validation->set_rules('cause_title', lang('cause input cause_title'), 'required|trim');
+        $this->form_validation->set_rules('cause_title', lang('cause input cause_title'), 'required|trim');
+
+        if ($this->form_validation->run() == TRUE) return TRUE;
+
+        return FALSE;
+    }
+
     /**
-     * Delete an address
+     * Delete an cause
      *
      * @param  int $id
      */
@@ -241,28 +333,27 @@ class Cause extends Private_Controller
         $id = $this->uri->segment(3);
         // make sure we have a numeric id
         if (!is_null($id) OR !is_numeric($id)) {
-            // if address belongs to the user
-            if ($this->address_model->is_created_by_user($this->_uid, $id)) {
-                $delete = $this->address_model->delete_address($id);
+            // if cause belongs to the user
+            if ($this->cause_model->is_created_by_user($this->_uid, $id)) {
+                $delete = $this->cause_model->delete_address($id);
 
                 if ($delete) {
-                    $this->session->set_flashdata('message', lang('address msg deleted'));
+                    $this->session->set_flashdata('message', lang('cause msg deleted'));
                 } else {
-                    $this->session->set_flashdata('error', lang('address error deletefail'));
+                    $this->session->set_flashdata('error', lang('cause error deletefail'));
                 }
 
             } else {
-                $this->session->set_flashdata('error', lang('address error belong'));
+                $this->session->set_flashdata('error', lang('cause error belong'));
             }
         } else {
-            $this->session->set_flashdata('error', lang('address id required'));
+            $this->session->set_flashdata('error', lang('cause id required'));
         }
 
 
         // return to list and display message
         redirect($this->_redirect_url);
     }
-
 
 
 }
