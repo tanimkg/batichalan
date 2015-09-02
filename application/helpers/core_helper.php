@@ -210,3 +210,11 @@ if( ! function_exists('csd_to_array'))
         return $temp;
     }
 }
+
+if( ! function_exists('confirm_delete'))
+{
+    function confirm_delete($uri)
+    {
+
+    }
+}

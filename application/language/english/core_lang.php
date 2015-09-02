@@ -20,6 +20,8 @@ $lang['core button reset']               	= "Reset";
 $lang['core button save']                	= "Save";
 $lang['core button search']              	= "Search";
 $lang['core button toggle_nav']          	= "Toggle navigation";
+$lang['core input category']          	= "Category";
+$lang['core input sub_category']          	= "Sub-category";
 
 // Text
 $lang['core text no']                    	= "No";

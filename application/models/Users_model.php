@@ -123,7 +123,10 @@ class Users_model extends CI_Model {
 
             if ($query->num_rows())
             {
-                return $query->row_array();
+                $r = $query->row_array();
+                unset($r['password']);
+                unset($r['salt']);
+                return $r;
             }
         }
 
