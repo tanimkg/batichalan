@@ -37,18 +37,6 @@ class Contact extends Public_Controller
         }
     }
 
-
-    public function test ()
-    {
-        $logged_in_user = $this->session->userdata('logged_in');
-        $uid = $logged_in_user['id'];
-
-        $contacts = $this->contactno_model->get_contacts_of_user($uid);
-
-
-        print_r($contacts);
-    }
-
     /**************************************************************************************
      * PUBLIC FUNCTIONS
      **************************************************************************************/
@@ -252,10 +240,6 @@ class Contact extends Public_Controller
         redirect($this->_redirect_url);
     }
 
-
-    public function list_all()
-    {
-    }
 
     /**
      * Default

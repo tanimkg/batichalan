@@ -45,26 +45,6 @@ class Cause extends Private_Controller
     }
 
 
-    public function test()
-    {
-        // setup page header data
-        $this->set_title(lang('address add title'));
-
-        $data = $this->includes;
-
-        // set content data
-        $this->load->model('keyvalues_model'); // prerequisite
-
-        $content_data = array(
-            'uid' => $this->_uid,
-            'addr_types' => $this->keyvalues_model->get_key_values_where_identifier('addr_type'),
-        );
-
-        // load views
-        $data['content'] = $this->load->view('cause/index', $content_data, TRUE);
-        $this->load->view($this->template, $data);
-    }
-
     /**************************************************************************************
      * PUBLIC FUNCTIONS
      **************************************************************************************/
@@ -183,101 +163,6 @@ class Cause extends Private_Controller
         $data['content'] = $this->load->view('cause/add_step_3', $content_data, TRUE);
         $this->load->view($this->template, $data);
     }
-
-
-
-    public function add()
-    {
-
-        // validators
-        if ($this->validate_form() == TRUE) {
-
-            $saved = $this->cause_model->add($this->input->post());
-
-            // set message
-            if ($saved) {
-                $this->session->set_flashdata('message', 'Address has been saved');
-
-            } else {
-                $this->session->set_flashdata('error', 'There was a problem while saving');
-            }
-
-            redirect($this->_redirect_url);
-        }
-
-        // setup page header data
-        $this->set_title(lang('cause add title'));
-
-        $data = $this->includes;
-
-        // set content data
-        $this->load->model('keyvalues_model'); // prerequisite
-
-        $profile_related = ($this->is_profile_related()) ? 1 : 0;
-
-        $content_data = array(
-            'uid' => $this->_uid,
-            'addr_id' => NULL,
-            'profile_related' => $profile_related,
-            'cancel' => $this->_redirect_url,
-            'cause' => NULL,
-            'addr_types' => $this->keyvalues_model->get_key_values_where_identifier('addr_type'),
-        );
-
-        // load views
-        $data['content'] = $this->load->view('cause/add', $content_data, TRUE);
-        $this->load->view($this->template, $data);
-    }
-
-
-
-    public function edit($id = NULL)
-    {
-        $cause_id = (($id == NULL) OR ($this->uri->segment(3))) ? $this->uri->segment(3) : NULL;
-
-        // declare $cause = Null, if something is there it will be changed midway
-        $cause = NULL;
-
-        // make sure we have a numeric id
-        if ( !is_null($id) OR is_numeric($id)) {
-            // if user is not the creator of this cause, shoot him up
-            if ( ! $this->cause_model->is_crud_authorized($this->_uid, $id)) redirect($this->_redirect_url);
-            $cause = $this->cause_model->get_cause_by_id($cause_id);
-        }
-
-        // validators
-        if ($this->validate_form_step_1() == TRUE) {
-
-            $saved = $this->cause_model->update($this->input->post());
-
-            // set message
-            if ($saved) {
-                $this->session->set_flashdata('message', lang('cause m saved'));
-
-            } else {
-                $this->session->set_flashdata('error', lang('core error save'));
-            }
-            $this->_redirect_url = base_url('cause/edit_step_2/' . $saved);
-            redirect($this->_redirect_url);
-        }
-
-        // setup page header data
-        $this->set_title(lang('cause edit title'));
-
-        $data = $this->includes;
-
-        $content_data = array(
-            'uid' => $this->_uid,
-            'cause_id' => $cause_id,    // null in case of new add, int if edit
-            'cancel' => $this->_redirect_url,
-            'cause' => $cause,
-        );
-
-        // load views
-        $data['content'] = $this->load->view('cause/add_step_1', $content_data, TRUE);
-        $this->load->view($this->template, $data);
-    }
-
 
     public function index()
     {
