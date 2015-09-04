@@ -8,7 +8,6 @@
 
 
 <!-- script references -->
-<script src="<?php echo base_url($this->config->item('jquery')); ?>"></script>
 <script src="<?php echo base_url($this->config->item('bootstrap_js')); ?>"></script>
 </body>
 </html>

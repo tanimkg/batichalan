@@ -32,7 +32,7 @@ class MY_Controller extends CI_Controller
         $this->output->enable_profiler($this->config->item('profiler'));
     }
 
-    function _view($folder, $view_file, $data, $include_container = TRUE){
+    function _view($folder, $view_file, $data = NULL, $include_container = TRUE){
         if (is_array($data))
         {
             if (!in_array('site_title', $data)) $data['site_title'] = lang('core site name');
@@ -49,13 +49,13 @@ class MY_Controller extends CI_Controller
     }
 
 
-    function private_view($view_file, $data, $include_container = TRUE){
+    function private_view($view_file, $data = NULL, $include_container = TRUE){
 
         $this->_view('private', $view_file, $data, $include_container);
     }
 
 
-    function public_view($view_file, $data, $include_container = TRUE){
+    function public_view($view_file, $data = NULL, $include_container = TRUE){
 
         $this->_view('public', $view_file, $data, $include_container);
     }
@@ -148,7 +148,7 @@ class Admin_Controller extends MY_Controller {
     }
 
 
-    function admin_view($view_file, $data, $include_container = TRUE){
+    function admin_view($view_file, $data = NULL, $include_container = TRUE){
 
         parent::_view('admin', $view_file, $data, $include_container);
     }

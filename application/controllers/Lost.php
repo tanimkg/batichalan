@@ -31,7 +31,7 @@ class Lost extends Private_Controller
         if ($this->session->userdata(REFERRER)) {
             $this->_redirect_url = $this->session->userdata(REFERRER);
         } else {
-            $this->_redirect_url = THIS_URL;
+            $this->_redirect_url = base_url('lost');
         }
 
         // get logged in user's detail
@@ -48,11 +48,6 @@ class Lost extends Private_Controller
     /**************************************************************************************
      * PUBLIC FUNCTIONS
      **************************************************************************************/
-
-    public function recent($is_ajax = TRUE)
-    {
-
-    }
 
 
     public function add()
@@ -125,23 +120,25 @@ class Lost extends Private_Controller
     /*
      * Displays recent posts by other users
      * */
+    public function recent($last_id = NULL)
+    {
+        $last_id = (($last_id == NULL) OR ($this->uri->segment(3))) ? $this->uri->segment(3) : NULL;
+
+        $res_data = $this->lost_model->get_recents($last_id, 1);
+        // make the result array cleaner by stripping away the last id and assigning it to another var
+        $last_id = $res_data['last_id']; // initial last id val changed here
+        unset($res_data['last_id']);
+
+            $data['losts'] = $res_data;
+            $data['last_id'] = $last_id;
+            $this->load->view('lost/single_entry', $data);
+
+    }
+
+
     public function index()
     {
-
-        $res_data = $this->lost_model->get_losts_of_user($this->_uid);
-
-        // set content data
-        $this->load->model('keyvalues_model'); // prerequisite
-
-
-        $data = array(
-            'uid' => $this->_uid,
-            'addresses' => $res_data,
-            'addr_types' => $this->keyvalues_model->get_key_values_where_identifier('addr_type'),
-            'page_title' => lang('lost list title')
-        );
-
-        // load views
+        $data['page_title'] = 'Losts and Founds';
         $this->public_view('lost/index', $data);
     }
 
