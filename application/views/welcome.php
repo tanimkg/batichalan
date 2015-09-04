@@ -1,40 +1,124 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<!-- Carousel
+================================================== -->
+<div id="myCarousel" class="carousel slide">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="item active">
+            <img src="<?= base_url('assets/img/lost_f.jpg') ?>" style="width:100%" class="img-responsive">
 
-<?php echo $welcome_message; ?>
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1>Lost and Found</h1>
 
-<div class="clearfix"></div>
-<hr />
+                    <p class="lead">Share what you have lost or found</p>
 
-<p>If you would like to edit this page you'll find the View located at:</p>
-<code>application/views/welcome.php</code>
+                    <p><a class="btn btn-lg btn-primary" href="<?= base_url('signup') ?>">Join Now</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="<?= base_url('assets/img/cause_f.jpg') ?>" class="img-responsive">
 
-<div class="clearfix"><br /></div>
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1>Apply for a Cause</h1>
 
-<p>The corresponding Controller for this page is found at:</p>
-<code>application/controllers/Welcome.php</code>
+                    <p>Apply and vote for a cause</p>
 
-<div class="clearfix"><hr /></div>
+                    <p><a class="btn btn-lg btn-primary" href="<?= base_url('signup') ?>">Join Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="<?= base_url('assets/img/promote_f.jpg') ?>" class="img-responsive">
 
-<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="http://www.codeigniter.com/userguide3/index.html" target="_blank">User Guide</a>.</p>
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1>Promote by Me</h1>
 
-<div class="clearfix"><hr /></div>
+                    <p>Promote companies and get paid</p>
 
-<p>Click <a href="<?php echo base_url('api/users'); ?>">HERE</a> to view sample API output of users. This is for demo purposes only! Be sure to remove the users API before putting your site in a production environment.</p>
+                    <p><a class="btn btn-lg btn-primary" href="<?= base_url('signup') ?>">Join Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+        <span class="icon-prev"></span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+        <span class="icon-next"></span>
+    </a>
+</div>
+<!-- /.carousel -->
 
-<div class="clearfix"><hr /></div>
 
-<p>Click <a href="<?php echo base_url('profile'); ?>">HERE</a> to view a sample user profile.</p>
-<p>
-    Username: <strong>johndoe</strong><br />
-    OR Email: <strong>john@doe.com</strong><br />
-    Password: <strong>johndoe</strong>
-</p>
+<!-- Marketing messaging and featurettes
+================================================== -->
+<!-- Wrap the rest of the page in another container to center all the content. -->
 
-<div class="clearfix"><hr /></div>
+<div class="container marketing">
 
-<p>Click <a href="<?php echo base_url('admin'); ?>">HERE</a> to view the admin interface.</p>
-<p>
-    Username: <strong>admin</strong><br />
-    OR Email: <strong>admin@admin.com</strong><br />
-    Password: <strong>admin</strong>
-</p>
+    <!-- START THE FEATURETTES -->
+
+    <div class="featurette">
+        <img class="featurette-image img-circle pull-right" src="<?= base_url('assets/img/lost_found.png') ?>">
+
+        <h2 class="featurette-heading">Lost and Found <span class="text-muted"></span></h2>
+
+
+        <ul>
+            <li><p class="lead">Remember the last time you lost something and found it back? How awesome did you feel? Give the same
+                pleasure to someone else by notifying what you have found by chance. One might be very thankful for
+                getting his goods back.</p>
+            </li>
+            <li><p class="lead">Or is that you lost something? No worries, post it here and see if there is any response.</p></li>
+        </ul>
+
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="featurette">
+        <img class="featurette-image img-circle pull-left" src="<?= base_url('assets/img/cause.png') ?>">
+
+        <h2 class="featurette-heading">Apply for a Cause <span class="text-muted">To the Proper Authority.</span></h2>
+
+        <ul>
+            <li><p class="lead">Let us guess, you are worried about your social difficulties. Then you are at the just place.</p></li>
+            <li><p class="lead">
+                Create a cause and invite others to vote. Highly voted causes are sent to the proper authority for their
+                attention. Which you cannot draw by any other means.</p>
+            </li>
+        </ul>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="featurette">
+        <img class="featurette-image img-circle pull-right" src="<?= base_url('assets/img/promote.png') ?>">
+
+        <h2 class="featurette-heading">Promote by Me. <span class="text-muted"></span></h2>
+
+        <p class="lead">
+        <ul>
+            <li><p class="lead">Earn some serious cash by lending your property's (or anything else's) space for marketing</p>
+            </li>
+            <li><p class="lead">Look for a sponsor</p></li>
+            <li>
+                <p class="lead">Make your unused space a fortune</p>
+            </li>
+        </ul>
+        </p>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <!-- /END THE FEATURETTES -->

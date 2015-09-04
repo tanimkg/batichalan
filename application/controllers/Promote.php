@@ -64,21 +64,16 @@ class Promote extends Private_Controller
             redirect('promote/view/'.$saved);
         }
 
-        // setup page header data
-        $this->set_title(lang('promote add title'));
-
-        $data = $this->includes;
-
-        $content_data = array(
+        $data = array(
             'uid' => $this->_uid,
             'promote_id' => NULL,
             'cancel' => $this->_redirect_url,
             'promote' => NULL,
+            'page_title' => lang('promote add title')
         );
 
         // load views
-        $data['content'] = $this->load->view('promote/add', $content_data, TRUE);
-        $this->load->view($this->template, $data);
+        $this->public_view('promote/add', $data);
     }
 
     public function edit($id = NULL)
@@ -122,21 +117,16 @@ class Promote extends Private_Controller
             redirect('promote/view/'.$saved);
         }
 
-        // setup page header data
-        $this->set_title(lang('promote edit title'));
-
-        $data = $this->includes;
-
-        $content_data = array(
+        $data = array(
             'uid' => $this->_uid,
             'promote_id' => $id,
             'cancel' => $this->_redirect_url,
             'promote' => $promote,
+            'page_title' => lang('promote edit title')
         );
 
         // load views
-        $data['content'] = $this->load->view('promote/add', $content_data, TRUE);
-        $this->load->view($this->template, $data);
+        $this->public_view('promote/add', $data);
     }
 
 
@@ -145,25 +135,19 @@ class Promote extends Private_Controller
 
         $res_data = $this->promote_model->get_addresses_of_user($this->_uid);
 
-
-        // setup page header data
-        $this->set_title(lang('address list title'));
-
-        $data = $this->includes;
-
         // set content data
         $this->load->model('keyvalues_model'); // prerequisite
 
 
-        $content_data = array(
+        $data = array(
             'uid' => $this->_uid,
             'addresses' => $res_data,
             'addr_types' => $this->keyvalues_model->get_key_values_where_identifier('addr_type'),
+            'page_title' => lang('address list title')
         );
 
         // load views
-        $data['content'] = $this->load->view('address/index', $content_data, TRUE);
-        $this->load->view($this->template, $data);
+        $this->public_view('address/index', $data);
     }
 
     public function view($id = NULL)
@@ -189,23 +173,17 @@ class Promote extends Private_Controller
         $creator = $this->users_model->get_user($promote['created_by_uid']);
         $creator_contact = $this->contactno_model->get_contact_by_id($creator['c_contact_id']);
 
-        // setup page header data
-        $this->set_title($promote['title']);
-
-        $data = $this->includes;
-
-
-        $content_data = array(
+        $data = array(
             'creator' => $creator,
             'contact' => $creator_contact,
             'promote_id' => $id,
             'cancel' => $this->_redirect_url,
             'promote' => $promote,
+            'page_title' => $promote['title']
         );
 
         // load views
-        $data['content'] = $this->load->view('promote/view', $content_data, TRUE);
-        $this->load->view($this->template, $data);
+        $this->public_view('promote/view', $data);
 
     }
 

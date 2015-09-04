@@ -64,30 +64,23 @@ class Contact extends Public_Controller
 
         $logged_in_user = $this->session->userdata('logged_in');
         $_uid = $logged_in_user['id'];
-
-
-
-        // setup page header data
-        $this->set_title(lang('contact add title'));
-
-        $data = $this->includes;
-
+        
         // set content data
         $this->load->model('keyvalues_model'); // prerequisite
 
 
-        $content_data = array(
+        $data = array(
             'uid' => $_uid,
             'contact_id' => NULL,
             'redirect' => $this->_redirect_url,
             'contact' => NULL,
             'privacies' => $this->keyvalues_model->get_privacy_types(),
             'contact_types' => $this->keyvalues_model->get_contact_types(),
+            'page_title' => lang('contact add title')
         );
 
         // load views
-        $data['content'] = $this->load->view('contact/add', $content_data, TRUE);
-        $this->load->view($this->template, $data);
+        $this->public_view('contact/add', $data);
     }
 
 
@@ -140,27 +133,22 @@ class Contact extends Public_Controller
             redirect($this->_redirect_url);
         }
 
-        // setup page header data
-        $this->set_title(lang('contact edit title'));
 
-        $data = $this->includes;
-
-        // set content data
         $this->load->model('keyvalues_model'); // prerequisite
 
 
-        $content_data = array(
+        $data = array(
             'uid' => $_uid,
             'contact_id' => $id,
             'contact' => $contact,
             'redirect' => $this->_redirect_url,
             'privacies' => $this->keyvalues_model->get_privacy_types(),
             'contact_types' => $this->keyvalues_model->get_contact_types(),
+            'page_title' => lang('contact edit title')
         );
 
         // load views
-        $data['content'] = $this->load->view('contact/add', $content_data, TRUE);
-        $this->load->view($this->template, $data);
+        $this->public_view('contact/add', $data);
     }
 
 
@@ -173,26 +161,20 @@ class Contact extends Public_Controller
 
         $contacts = $this->contactno_model->get_contacts_of_user($uid);
 
-
-        // setup page header data
-        $this->set_title(lang('contact list title'));
-
-        $data = $this->includes;
-
         // set content data
         $this->load->model('keyvalues_model'); // prerequisite
 
 
-        $content_data = array(
+        $data = array(
             'uid' => $uid,
             'contacts' => $contacts,
             'privacies' => $this->keyvalues_model->get_privacy_types(),
             'contact_types' => $this->keyvalues_model->get_contact_types(),
+            'page_title' => lang('contact list title')
         );
 
         // load views
-        $data['content'] = $this->load->view('contact/index', $content_data, TRUE);
-        $this->load->view($this->template, $data);
+        $this->public_view('contact/index', $data);
     }
 
     public function view()
@@ -287,19 +269,14 @@ class Contact extends Public_Controller
         // store captcha image
         $this->contact_model->save_captcha($captcha_data);
 
-        // setup page header data
-        $this->set_title(lang('contact title'));
-
-        $data = $this->includes;
-
         // set content data
-        $content_data = array(
-            'captcha_image' => $captcha['image']
+        $data = array(
+            'captcha_image' => $captcha['image'],
+            'page_title' => lang('contact title')
         );
 
         // load views
-        $data['content'] = $this->load->view('contact/form', $content_data, TRUE);
-        $this->load->view($this->template, $data);
+        $this->public_view('contact/form', $data);
     }
 
 

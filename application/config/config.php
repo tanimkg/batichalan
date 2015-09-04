@@ -17,7 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | environments.
 |
 */
-$config['base_url'] = 'http://localhost/ci3_fire/htdocs/';
+$config['base_url'] = 'http://localhost/ci3_fire/';
 
 /*
 |--------------------------------------------------------------------------

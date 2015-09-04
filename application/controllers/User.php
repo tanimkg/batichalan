@@ -74,16 +74,10 @@ class User extends Public_Controller {
             }
         }
 
-        // setup page header data
-		$this->add_css_theme( 'login.css' );
-
-        $this->set_title( lang('users title login') );
-
-        $data = $this->includes;
+        $data['page_title'] = lang('users title login');
 
         // load views
-        $data['content'] = $this->load->view('user/login', NULL, TRUE);
-        $this->load->view($this->template, $data);
+        $this->public_view('user/login', $data);
     }
 
 
@@ -153,21 +147,16 @@ class User extends Public_Controller {
             redirect(base_url());
         }
 
-        // setup page header data
-        $this->set_title( lang('users title register') );
-
-        $data = $this->includes;
-
         // set content data
-        $content_data = array(
+        $data = array(
             'cancel_url'        => base_url(),
             'user'              => NULL,
-            'password_required' => TRUE
+            'password_required' => TRUE,
+            'page_title' => lang('users title register')
         );
 
         // load views
-        $data['content'] = $this->load->view('user/profile_form', $content_data, TRUE);
-        $this->load->view($this->template, $data);
+        $this->public_view('user/profile_form', $data);
     }
 
 
@@ -243,20 +232,15 @@ class User extends Public_Controller {
             redirect(base_url());
         }
 
-        // setup page header data
-        $this->set_title( lang('users title forgot') );
-
-        $data = $this->includes;
-
         // set content data
         $content_data = array(
             'cancel_url' => base_url(),
-            'user'       => NULL
+            'user'       => NULL,
+            'page_title' => lang('users title forgot')
         );
 
         // load views
-        $data['content'] = $this->load->view('user/forgot_form', $content_data, TRUE);
-        $this->load->view($this->template, $data);
+        $this->public_view('user/forgot_form', $data);
     }
 
 

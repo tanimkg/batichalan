@@ -65,11 +65,6 @@ class Address extends Public_Controller
             redirect($this->_redirect_url);
         }
 
-        // setup page header data
-        $this->set_title(lang('address add title'));
-
-        $data = $this->includes;
-
         // set content data
         $this->load->model('keyvalues_model'); // prerequisite
 
@@ -77,6 +72,7 @@ class Address extends Public_Controller
 
         $content_data = array(
             'uid' => $this->_uid,
+            'page_title' => lang('address add title'),
             'addr_id' => NULL,
             'profile_related' => $profile_related,
             'cancel' => $this->_redirect_url,
@@ -85,8 +81,7 @@ class Address extends Public_Controller
         );
 
         // load views
-        $data['content'] = $this->load->view('address/add', $content_data, TRUE);
-        $this->load->view($this->template, $data);
+        $this->public_view('address/add', $content_data);
     }
 
     public function edit($id = NULL)
@@ -131,15 +126,11 @@ class Address extends Public_Controller
 
         $profile_related = ($this->is_profile_related()) ? 1 : 0;
 
-        // setup page header data
-        $this->set_title(lang('address edit title'));
-
-        $data = $this->includes;
-
         // set content data
         $this->load->model('keyvalues_model'); // prerequisite
-        $content_data = array(
+        $data = array(
             'uid' => $this->_uid,
+            'page_title' => lang('address edit title'),
             'addr_id' => $id,
             'profile_related' => $profile_related,
             'cancel' => $this->_redirect_url,
@@ -148,8 +139,7 @@ class Address extends Public_Controller
         );
 
         // load views
-        $data['content'] = $this->load->view('address/add', $content_data, TRUE);
-        $this->load->view($this->template, $data);
+        $this->public_view('address/add', $data);
     }
 
 
@@ -158,25 +148,19 @@ class Address extends Public_Controller
 
         $res_data = $this->address_model->get_addresses_of_user($this->_uid);
 
-
-        // setup page header data
-        $this->set_title(lang('address list title'));
-
-        $data = $this->includes;
-
         // set content data
         $this->load->model('keyvalues_model'); // prerequisite
 
 
-        $content_data = array(
+        $data = array(
             'uid' => $this->_uid,
+            'page_title' => lang('address list title'),
             'addresses' => $res_data,
             'addr_types' => $this->keyvalues_model->get_key_values_where_identifier('addr_type'),
         );
 
         // load views
-        $data['content'] = $this->load->view('address/index', $content_data, TRUE);
-        $this->load->view($this->template, $data);
+        $this->public_view('address/index', $data);
     }
 
     public function view()

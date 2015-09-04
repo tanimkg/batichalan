@@ -67,21 +67,16 @@ class Cause extends Private_Controller
             redirect($this->_redirect_url);
         }
 
-        // setup page header data
-        $this->set_title(lang('cause add title'));
-
-        $data = $this->includes;
-
-        $content_data = array(
+        $data = array(
             'uid' => $this->_uid,
+            'page_title' => lang('cause add title'),
             'cause_id' => NULL,    // null in case of new add, int if edit
             'cancel' => $this->_redirect_url,
             'cause' => NULL,
         );
 
         // load views
-        $data['content'] = $this->load->view('cause/add_step_1', $content_data, TRUE);
-        $this->load->view($this->template, $data);
+        $this->public_view('cause/add_step_1', $data);
     }
 
     public function edit_step_2( $id = NULL )
@@ -106,21 +101,16 @@ class Cause extends Private_Controller
             redirect($this->_redirect_url);
         }
 
-        // setup page header data
-        $this->set_title(lang('cause edit title'));
-
-        $data = $this->includes;
-
-        $content_data = array(
+        $data = array(
             'uid' => $this->_uid,
             'cause_id' => $cause_id,
             'cancel' => $this->_redirect_url,
             'cause' => $this->cause_model->get_cause_by_id($cause_id),
+            'page_title' => lang('cause edit title')
         );
 
         // load views
-        $data['content'] = $this->load->view('cause/add_step_2', $content_data, TRUE);
-        $this->load->view($this->template, $data);
+        $this->public_view('cause/add_step_2', $data);
 
     }
 
@@ -147,21 +137,16 @@ class Cause extends Private_Controller
             redirect($this->_redirect_url);
         }
 
-        // setup page header data
-        $this->set_title(lang('cause edit title'));
-
-        $data = $this->includes;
-
-        $content_data = array(
+        $data = array(
             'uid' => $this->_uid,
             'cause_id' => $cause_id,
             'cancel' => $this->_redirect_url,
             'cause' => $this->cause_model->get_cause_by_id($cause_id),
+            'page_title' => lang('cause edit title')
         );
 
         // load views
-        $data['content'] = $this->load->view('cause/add_step_3', $content_data, TRUE);
-        $this->load->view($this->template, $data);
+        $this->public_view('cause/add_step_3', $data);
     }
 
     public function index()
@@ -169,25 +154,19 @@ class Cause extends Private_Controller
 
         $res_data = $this->cause_model->get_causes_of_user($this->_uid);
 
-
-        // setup page header data
-        $this->set_title(lang('cause list title'));
-
-        $data = $this->includes;
-
         // set content data
         $this->load->model('keyvalues_model'); // prerequisite
 
 
-        $content_data = array(
+        $data = array(
             'uid' => $this->_uid,
             'addresses' => $res_data,
             'addr_types' => $this->keyvalues_model->get_key_values_where_identifier('addr_type'),
+            'page_title' => lang('cause list title')
         );
 
         // load views
-        $data['content'] = $this->load->view('cause/index', $content_data, TRUE);
-        $this->load->view($this->template, $data);
+        $this->public_view('cause/index', $data);
     }
 
     public function view( $id = NULL )
@@ -199,20 +178,15 @@ class Cause extends Private_Controller
             $cause = $this->cause_model->get_cause_by_id($cause_id);
         }
 
-        // setup page header data
-        $this->set_title($cause['cause_title']);
-
-        $data = $this->includes;
-
-        $content_data = array(
+        $data = array(
             'uid' => $this->_uid,
             'cause_id' => $cause_id,
             'cause' => $cause,
+            'page_title' => $cause['cause_title']
         );
 
         // load views
-        $data['content'] = $this->load->view('cause/view', $content_data, TRUE);
-        $this->load->view($this->template, $data);
+        $this->public_view('cause/view', $data);
     }
 
     // TODO: Not implemented yet
@@ -227,20 +201,15 @@ class Cause extends Private_Controller
 
         }
 
-        // setup page header data
-        $this->set_title($cause['cause_title']);
-
-        $data = $this->includes;
-
-        $content_data = array(
+        $data = array(
             'uid' => $this->_uid,
             'cause_id' => $cause_id,
             'cause' => $cause,
+            'page_title' => $cause['cause_title'],
         );
 
         // load views
-        $data['content'] = $this->load->view('cause/view', $content_data, TRUE);
-        $this->load->view($this->template, $data);
+        $this->public_view('cause/supporters', $data);
     }
 
 

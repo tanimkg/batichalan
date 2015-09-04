@@ -77,21 +77,16 @@ class Profile extends Private_Controller {
             redirect('profile');
         }
 
-        // setup page header data
-		$this->set_title( lang('users title profile') );
-		
-        $data = $this->includes;
-
         // set content data
-        $content_data = array(
+        $data = array(
             'cancel_url'        => base_url(),
             'user'              => $this->user,
-            'password_required' => FALSE
+            'password_required' => FALSE,
+            'page_title' => lang('users title profile')
         );
 
         // load views
-        $data['content'] = $this->load->view('user/profile_form', $content_data, TRUE);
-        $this->load->view($this->template, $data);
+        $this->public_view('user/profile_form', $data);
 	}
 
 
@@ -135,14 +130,8 @@ class Profile extends Private_Controller {
             redirect('login');
         }
 
-
-        // setup page header data
-        $this->set_title( lang('profile title welcome') );
-
-        $data = $this->includes;
-
         // set content data
-        $content_data = array(
+        $data = array(
             'usr'              => $ud,
             'primary_contact'    => $primary_contact,
             'other_contacts'    => $other_contacts,
@@ -151,22 +140,14 @@ class Profile extends Private_Controller {
             'followings'        => $followings,
             'followers'         => $followers,
             'id'                => $this->_uid,
+            'page_title'        => lang('profile title welcome')
         );
 
 
         // load views
-        $data['content'] = $this->load->view('profile/index', $content_data, TRUE);
-        $this->load->view($this->template, $data);
+        $this->public_view('profile/index', $data);
     }
 
-
-    public function test()
-    {
-        $ar = array();
-        $res = $this->users_model->get_username_and_fullname(3);
-        $ar[] = $res;
-        var_dump($ar);
-    }
     /**************************************************************************************
      * PRIVATE VALIDATION CALLBACK FUNCTIONS
      **************************************************************************************/

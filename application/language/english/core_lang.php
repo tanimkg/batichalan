@@ -4,10 +4,14 @@
  */
 
 // Titles
+$lang['core site name'] 				= "Batichalan";
 $lang['core title welcome'] 				= "Welcome to %s";
 
 // Buttons
 $lang['core button admin']                  = "Admin";
+$lang['core button lost']              	= "Lost and Found";
+$lang['core button promote']              	= "Promote by Me";
+$lang['core button cause']              	= "Apply for a Cause";
 $lang['core button cancel']              	= "Cancel";
 $lang['core button close']               	= "Close";
 $lang['core button contact']               	= "Contact";
