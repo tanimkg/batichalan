@@ -49,10 +49,6 @@ class Cause extends Private_Controller
      * PUBLIC FUNCTIONS
      **************************************************************************************/
 
-    public function recent($is_ajax = TRUE)
-    {
-
-    }
     public function add_step_1()
     {
         // validators
@@ -153,23 +149,28 @@ class Cause extends Private_Controller
         $this->public_view('cause/add_step_3', $data);
     }
 
+    /*
+     * Displays recent posts by other users
+     * */
+    public function recent($last_id = NULL)
+    {
+        $last_id = (($last_id == NULL) OR ($this->uri->segment(3))) ? $this->uri->segment(3) : NULL;
+
+        $res_data = $this->cause_model->get_recents($last_id);
+        // make the result array cleaner by stripping away the last id and assigning it to another var
+        $last_id = $res_data['last_id']; // initial last id val changed here
+        unset($res_data['last_id']);
+
+        $data['causes'] = $res_data;
+        $data['last_id'] = $last_id;
+        $this->load->view('cause/single_entry', $data);
+
+    }
+
+
     public function index()
     {
-
-        $res_data = $this->cause_model->get_causes_of_user($this->_uid);
-
-        // set content data
-        $this->load->model('keyvalues_model'); // prerequisite
-
-
-        $data = array(
-            'uid' => $this->_uid,
-            'addresses' => $res_data,
-            'addr_types' => $this->keyvalues_model->get_key_values_where_identifier('addr_type'),
-            'page_title' => lang('cause list title')
-        );
-
-        // load views
+        $data['page_title'] = 'Apply for a Cause';
         $this->public_view('cause/index', $data);
     }
 

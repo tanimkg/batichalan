@@ -70,6 +70,40 @@ class Cause_model extends CI_Model
     }
 
 
+
+    function get_recents($last_id = NULL, $limit = 10)
+    {
+        // return the last id so that next time accessing this method retrieves
+        // results having less than the last_id, thats how we are getting recent posts
+        if ($last_id == NULL) { $last_id = $this->get_latest_id(); }
+        $this->db->where($this->_pk . ' <', $last_id);
+        $this->db->order_by($this->_pk . ' desc');
+        $this->db->limit($limit);
+        $q = $this->db->get($this->_db);
+        $r = $q->result_array();
+        $last_row = $q->last_row('array');
+        $latest_id = $last_row[$this->_pk];
+
+        $r['last_id'] = $latest_id;
+
+        return $r;
+
+    }
+
+    function get_latest_id()
+    {
+        $this->db->select($this->_pk);
+        $this->db->where('created_at <', mdate('%Y-%m-%d %H:%i:%s', time()));
+        //$this->db->or_where('updated_at <', mdate('%Y-%m-%d %H:%i:%s', time()));
+        $this->db->order_by($this->_pk .' desc');
+        $this->db->limit(1);
+        $q = $this->db->get($this->_db);
+
+        $r = $q->row_array();
+        return $r[$this->_pk];
+    }
+
+
     function delete_address($id)
     {
         if ($this->db->delete($this->_db, [$this->_pk, $id])) { return TRUE; } else { return FALSE; }

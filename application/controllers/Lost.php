@@ -124,7 +124,7 @@ class Lost extends Private_Controller
     {
         $last_id = (($last_id == NULL) OR ($this->uri->segment(3))) ? $this->uri->segment(3) : NULL;
 
-        $res_data = $this->lost_model->get_recents($last_id, 1);
+        $res_data = $this->lost_model->get_recents($last_id);
         // make the result array cleaner by stripping away the last id and assigning it to another var
         $last_id = $res_data['last_id']; // initial last id val changed here
         unset($res_data['last_id']);
