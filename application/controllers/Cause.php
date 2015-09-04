@@ -49,6 +49,10 @@ class Cause extends Private_Controller
      * PUBLIC FUNCTIONS
      **************************************************************************************/
 
+    public function recent($is_ajax = TRUE)
+    {
+        
+    }
     public function add_step_1()
     {
         // validators

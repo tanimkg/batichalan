@@ -11,8 +11,6 @@ class Profile extends Private_Controller {
     {
         parent::__construct();
 
-        $this->add_css_theme("profile.css");
-
         // load the language file
         $this->lang->load('users');
 
@@ -145,7 +143,7 @@ class Profile extends Private_Controller {
 
 
         // load views
-        $this->public_view('profile/index', $data);
+        $this->public_view('profile/index', $data, FALSE);
     }
 
     /**************************************************************************************

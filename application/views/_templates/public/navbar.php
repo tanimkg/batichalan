@@ -30,6 +30,8 @@
         </form>
         <ul class="nav navbar-nav navbar-right">
             <?php if ($this->session->userdata('logged_in')) { ?>
+                <li><?= anchor('dashboard', ' My Dashboard', 'class="fa fa-dashboard"') ?></li>
+                <li><?= anchor('profile', ' My Profile', 'class="fa fa-profile"') ?></li>
                 <li><?= anchor('logout', ' Logout', 'class="fa fa-logout"') ?></li>
             <?php } else { ?>
                 <li><?= anchor('login', ' Login', 'class="fa fa-user"') ?></li>

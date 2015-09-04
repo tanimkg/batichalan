@@ -8,6 +8,7 @@ $lang['core site name'] 				= "Batichalan";
 $lang['core title welcome'] 				= "Welcome to %s";
 
 // Buttons
+$lang['core button all']                  = "All Posts";
 $lang['core button admin']                  = "Admin";
 $lang['core button lost']              	= "Lost and Found";
 $lang['core button promote']              	= "Promote by Me";
