@@ -35,12 +35,14 @@ class MY_Controller extends CI_Controller
     function _view($folder, $view_file, $data, $include_container = TRUE){
         if (is_array($data))
         {
-            if (!in_array('page_title', $data)) $data['page_title'] = lang('core site name');
+            if (!in_array('site_title', $data)) $data['site_title'] = lang('core site name');
         }
 
         $this->load->view('_templates/'. $folder .'/header', $data);
         $this->load->view('_templates/'. $folder .'/navbar', $data);
         if ($include_container) $this->load->view('_templates/'. $folder .'/container_start', $data);
+        $this->load->view('_templates/'. $folder .'/notifications', $data);
+        $this->load->view('_templates/'. $folder .'/page_title', $data);
         $this->load->view($view_file, $data);
         if ($include_container) $this->load->view('_templates/'. $folder .'/container_end', $data);
         $this->load->view('_templates/'. $folder .'/footer', $data);

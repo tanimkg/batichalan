@@ -18,6 +18,13 @@ echo form_open('', array('role'=>'form'));
 echo form_hidden('promote_id', $promote_id);
 echo form_hidden('created_by_uid', $uid);
 
+if ($promote_id) {
+    echo form_hidden('updated_at', mdate('%Y-%m-%d %H:%i:%s', time()));
+} else {
+    echo form_hidden('created_at', mdate('%Y-%m-%d %H:%i:%s', time()));
+}
+
+
 ?>
 
 

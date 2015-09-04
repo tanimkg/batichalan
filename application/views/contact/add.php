@@ -5,8 +5,17 @@ $type    = isset($contact['type']) ? $contact['type'] : '';
 $no      = isset($contact['no']) ? $contact['no'] : '';
 $privacy = isset($contact['privacy']) ? $contact['privacy'] : '';
 $cancel = isset($redirect) ? $redirect : site_url();
+
 ?>
-<?php echo form_open('', array('role'=>'form')); ?>
+<?php echo form_open('', array('role'=>'form'));
+
+if ($contact_id) {
+    echo form_hidden('updated_at', mdate('%Y-%m-%d %H:%i:%s', time()));
+} else {
+    echo form_hidden('created_at', mdate('%Y-%m-%d %H:%i:%s', time()));
+}
+
+?>
 
     <?php echo form_hidden('created_by_uid', $uid); ?>
     <?php echo form_hidden('contact_id', (isset($contact_id) ? $contact_id : NULL)); ?>

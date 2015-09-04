@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url($this->config->item('favicon')); ?>">
     <link rel="icon" type="image/x-icon" href="<?php echo base_url($this->config->item('favicon')); ?>">
-    <title><?php echo $page_title; ?> - <?php echo $this->config->item('site_title'); ?></title>
+    <title><?php echo ($site_title) ? $site_title . ' - ' : ''; ?><?php echo $this->config->item('site_title'); ?></title>
     <meta name="keywords" content="<?php echo $this->config->item('keywords'); ?>">
     <meta name="description" content="<?php echo $this->config->item('description'); ?>">
 

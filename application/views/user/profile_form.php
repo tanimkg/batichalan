@@ -4,7 +4,14 @@
 $birth_date = isset($user['birth_date']) ? $user['birth_date'] : '';
 $gender = isset($user['gender']) ? $user['gender'] : '';
 
-echo form_open('', array('role'=>'form')); ?>
+echo form_open('', array('role'=>'form'));
+if ($user['id']) {
+    echo form_hidden('updated_at', mdate('%Y-%m-%d %H:%i:%s', time()));
+} else {
+    echo form_hidden('created_at', mdate('%Y-%m-%d %H:%i:%s', time()));
+}
+
+?>
 
     <div class="row">
         <?php // username ?>

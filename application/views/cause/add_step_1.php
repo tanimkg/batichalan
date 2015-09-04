@@ -15,6 +15,13 @@ echo form_open('', array('role'=>'form'));
 echo form_hidden('cause_id', $cause_id);
 echo form_hidden('created_by_uid', $uid);
 
+if ($cause_id) {
+    echo form_hidden('updated_at', mdate('%Y-%m-%d %H:%i:%s', time()));
+} else {
+    echo form_hidden('created_at', mdate('%Y-%m-%d %H:%i:%s', time()));
+}
+
+
 ?>
 
 <div class="row">

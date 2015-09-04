@@ -51,7 +51,7 @@ class Cause extends Private_Controller
 
     public function recent($is_ajax = TRUE)
     {
-        
+
     }
     public function add_step_1()
     {

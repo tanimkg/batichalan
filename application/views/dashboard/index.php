@@ -4,13 +4,13 @@
         <ul class="nav nav-pills nav-stacked">
 
             <li class="<?php echo (uri_string() == 'dashboard') ? 'active' : ''; ?>"><a
-                    href="<?php echo base_url('/dashboard'); ?>"><?php echo lang('core button all'); ?></a></li>
+                    href="<?php echo base_url('/dashboard'); ?>" id="dashLoaderBtn"><?php echo lang('core button all'); ?></a></li>
             <li class="<?php echo (uri_string() == 'lost') ? 'active' : ''; ?>"><a
-                    href="<?php echo base_url('/lost'); ?>"><?php echo lang('core button lost'); ?></a></li>
+                    href="<?php echo base_url('/lost'); ?>"  id="lostLoaderBtn"><?php echo lang('core button lost'); ?></a></li>
             <li class="<?php echo (uri_string() == 'cause') ? 'active' : ''; ?>"><a
-                    href="<?php echo base_url('/cause'); ?>"><?php echo lang('core button cause'); ?></a></li>
+                    href="<?php echo base_url('/cause'); ?>"  id="causeLoaderBtn"><?php echo lang('core button cause'); ?></a></li>
             <li class="<?php echo (uri_string() == 'promote') ? 'active' : ''; ?>"><a
-                    href="<?php echo base_url('/promote'); ?>"><?php echo lang('core button promote'); ?></a></li>
+                    href="<?php echo base_url('/promote'); ?>"  id="promoteLoaderBtn"><?php echo lang('core button promote'); ?></a></li>
         </ul>
         <hr>
         <div class="list-group">
@@ -26,7 +26,7 @@
     <div class="col-md-9 content">
 
         <div class="panel panel-default">
-            <div class="panel-heading">
+            <div class="panel-heading" id="serviceName">
                 Service Name
             </div>
             <div class="panel-body">
@@ -65,3 +65,6 @@
     </div>
 </div>
 </div>
+<script>
+    var baseUrl = "<?= base_url() ?>";
+</script>
