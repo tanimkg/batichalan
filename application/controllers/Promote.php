@@ -130,26 +130,6 @@ class Promote extends Private_Controller
     }
 
 
-    public function index()
-    {
-
-        $res_data = $this->promote_model->get_addresses_of_user($this->_uid);
-
-        // set content data
-        $this->load->model('keyvalues_model'); // prerequisite
-
-
-        $data = array(
-            'uid' => $this->_uid,
-            'addresses' => $res_data,
-            'addr_types' => $this->keyvalues_model->get_key_values_where_identifier('addr_type'),
-            'page_title' => lang('address list title')
-        );
-
-        // load views
-        $this->public_view('address/index', $data);
-    }
-
     public function view($id = NULL)
     {
         $id = ($this->uri->segment(3)) ? $this->uri->segment(3) : $id;
@@ -185,6 +165,33 @@ class Promote extends Private_Controller
         // load views
         $this->public_view('promote/view', $data);
 
+    }
+
+
+
+    /*
+     * Displays recent posts by other users
+     * */
+    public function recent($last_id = NULL)
+    {
+        $last_id = (($last_id == NULL) OR ($this->uri->segment(3))) ? $this->uri->segment(3) : NULL;
+
+        $res_data = $this->promote_model->get_recents($last_id);
+        // make the result array cleaner by stripping away the last id and assigning it to another var
+        $last_id = $res_data['last_id']; // initial last id val changed here
+        unset($res_data['last_id']);
+
+        $data['promotes'] = $res_data;
+        $data['last_id'] = $last_id;
+        $this->load->view('promote/single_entry', $data);
+
+    }
+
+
+    public function index()
+    {
+        $data['page_title'] = 'Promote by Me';
+        $this->public_view('promote/index', $data);
     }
 
     /**

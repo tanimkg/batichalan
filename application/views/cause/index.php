@@ -13,15 +13,10 @@
                     href="<?php echo base_url('/promote'); ?>"  id="promoteLoaderBtn"><?php echo lang('core button promote'); ?></a></li>
         </ul>
         <hr>
-<!--        <div class="list-group">-->
-<!--            <a href="#" class="list-group-item active">-->
-<!--                Cras justo odio-->
-<!--            </a>-->
-<!--            <a href="#" class="list-group-item">Dapibus ac facilisis in</a>-->
-<!--            <a href="#" class="list-group-item">Morbi leo risus</a>-->
-<!--            <a href="#" class="list-group-item">Porta ac consectetur ac</a>-->
-<!--            <a href="#" class="list-group-item">Vestibulum at eros</a>-->
-<!--        </div>-->
+        <div class="list-group">
+            <?= anchor('cause/add_step_1', 'Create a Cause', 'class="list-group-item"'); ?>
+            <?= anchor('cause/list', 'List My Causes', 'class="list-group-item"'); ?>
+        </div>
     </div>
     <div class="col-md-9 content" id="causesLoadingDiv">
 

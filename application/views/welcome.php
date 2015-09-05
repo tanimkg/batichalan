@@ -1,6 +1,6 @@
 <!-- Carousel
 ================================================== -->
-<div id="myCarousel" class="carousel slide">
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -92,7 +92,7 @@
         <h2 class="featurette-heading">Apply for a Cause <span class="text-muted">To the Proper Authority.</span></h2>
 
         <ul>
-            <li><p class="lead">Let us guess, you are worried about your social difficulties. Then you are at the just place.</p></li>
+            <li><p class="lead">Let us guess, you are worried about your community problem. Then you are at the just place.</p></li>
             <li><p class="lead">
                 Create a cause and invite others to vote. Highly voted causes are sent to the proper authority for their
                 attention. Which you cannot draw by any other means.</p>

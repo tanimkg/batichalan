@@ -19,7 +19,15 @@ $lived_upto = isset($address['lived_upto']) ? $address['lived_upto'] : '';
 
 <?php echo form_hidden('created_by_uid', $uid); ?>
 <?php echo form_hidden('addr_id', (isset($addr_id) ? $addr_id : NULL)); ?>
-<?php echo form_hidden('profile_related', $profile_related); ?>
+<?php echo form_hidden('profile_related', $profile_related);
+
+if ($addr_id) {
+    echo form_hidden('updated_at', mdate('%Y-%m-%d %H:%i:%s', time()));
+} else {
+    echo form_hidden('created_at', mdate('%Y-%m-%d %H:%i:%s', time()));
+}
+
+?>
 
 <div class="row">
     <?php // type ?>

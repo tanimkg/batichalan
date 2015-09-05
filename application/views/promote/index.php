@@ -14,16 +14,16 @@
         </ul>
         <hr>
         <div class="list-group">
-            <?= anchor('lost/add', 'Create a Lost or Found Entry', 'class="list-group-item"'); ?>
-            <?= anchor('lost/list', 'List My Lost and Found Posts', 'class="list-group-item"'); ?>
+            <?= anchor('promote/add', 'Create a Promotion Offer', 'class="list-group-item"'); ?>
+            <?= anchor('promote/list', 'List My Promotion Posts', 'class="list-group-item"'); ?>
         </div>
     </div>
-    <div class="col-md-9 content" id="lostsLoadingDiv">
+    <div class="col-md-9 content" id="promotesLoadingDiv">
 
-        <button type="button" id="loadMoreLostsInit" class="btn btn-primary btn-lg btn-block">View Losts and Founds</button></div>
+        <button type="button" id="loadMorePromotesInit" class="btn btn-primary btn-lg btn-block">View Losts and Founds</button></div>
 
 
-    </div>
+</div>
 
 </div>
 </div>
@@ -31,16 +31,16 @@
     var baseUrl = "<?= base_url() ?>";
 
     $(document).ready(function(){
-        $('#loadMoreLostsInit').click(function(){
+        $('#loadMorePromotesInit').click(function(){
             $.ajax({
-                url: baseUrl + "/lost/recent/",
+                url: baseUrl + "/promote/recent/",
                 type: "GET",
                 success: function(view) {
-                    $('#lostsLoadingDiv').html(view);
-                    $('#loadMoreLostsInit').remove();
+                    $('#promotesLoadingDiv').html(view);
+                    $('#loadMorePromotesInit').remove();
                 },
                 error: function() {
-                    $('#lostsLoadingDiv').html('<h1>Error Loading! Try Again.</h1>');
+                    $('#promotesLoadingDiv').html('<h1>Error Loading! Try Again.</h1>');
                 }
             });
         });
