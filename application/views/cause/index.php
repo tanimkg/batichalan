@@ -20,7 +20,7 @@
     </div>
     <div class="col-md-9 content" id="causesLoadingDiv">
 
-        <button type="button" id="loadMoreCausesInit" class="btn btn-primary btn-lg btn-block">View Losts and Founds</button></div>
+        <button type="button" id="loadMoreCausesInit" class="btn btn-primary btn-lg btn-block">View Causes</button></div>
 
 
 </div>

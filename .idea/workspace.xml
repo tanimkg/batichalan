@@ -2,17 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9ba5edbe-b81b-4692-b393-1fa7c16770f1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/views/promote/index.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/views/promote/single_entry.php" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/application/views/home/index.php" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/Promote.php" afterPath="$PROJECT_DIR$/application/controllers/Promote.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Promote_model.php" afterPath="$PROJECT_DIR$/application/models/Promote_model.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/Welcome.php" afterPath="$PROJECT_DIR$/application/controllers/Welcome.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/address/add.php" afterPath="$PROJECT_DIR$/application/views/address/add.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/cause/index.php" afterPath="$PROJECT_DIR$/application/views/cause/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/lost/index.php" afterPath="$PROJECT_DIR$/application/views/lost/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/_templates/public/navbar.php" afterPath="$PROJECT_DIR$/application/views/_templates/public/navbar.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/welcome.php" afterPath="$PROJECT_DIR$/application/views/welcome.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/promote/index.php" afterPath="$PROJECT_DIR$/application/views/promote/index.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ci3_fire.iws" />
@@ -35,51 +26,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="add.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/address/add.php">
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/cause/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.8461537">
-              <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
+            <state vertical-scroll-proportion="-12.5">
+              <caret line="22" column="106" selection-start-line="22" selection-start-column="106" selection-end-line="22" selection-end-column="106" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/lost/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-5.6538463">
+              <caret line="18" column="14" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/views/cause/index.php">
+        <entry file="file://$PROJECT_DIR$/application/views/promote/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3617811">
-              <caret line="16" column="40" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="add.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/contact/add.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.0769231">
-              <caret line="11" column="15" selection-start-line="11" selection-start-column="15" selection-end-line="11" selection-end-column="15" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="add.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/promote/add.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="6.923077">
-              <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="profile_form.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/user/profile_form.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.3846154">
-              <caret line="7" column="16" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.54545456">
+              <caret line="22" column="118" selection-start-line="22" selection-start-column="118" selection-end-line="22" selection-end-column="118" />
               <folding />
             </state>
           </provider>
@@ -149,9 +120,9 @@
         <option value="$PROJECT_DIR$/application/controllers/Welcome.php" />
         <option value="$PROJECT_DIR$/application/views/welcome.php" />
         <option value="$PROJECT_DIR$/application/views/lost/index.php" />
-        <option value="$PROJECT_DIR$/application/views/promote/index.php" />
         <option value="$PROJECT_DIR$/application/views/address/add.php" />
         <option value="$PROJECT_DIR$/application/views/cause/index.php" />
+        <option value="$PROJECT_DIR$/application/views/promote/index.php" />
       </list>
     </option>
   </component>
@@ -908,7 +879,13 @@
       <option name="project" value="LOCAL" />
       <updated>1441406916394</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="stable beta 1">
+      <created>1441411231876</created>
+      <option name="number" value="00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1441411231876</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -990,7 +967,8 @@
     <MESSAGE value="Lost/add, edit implemented" />
     <MESSAGE value="implemented load more in lost/index (give yourself a tap on your back :)" />
     <MESSAGE value="implemented load more in cause/index" />
-    <option name="LAST_COMMIT_MESSAGE" value="implemented load more in cause/index" />
+    <MESSAGE value="stable beta 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="stable beta 1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1253,14 +1231,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/cause/single_entry.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.8461537">
-          <caret line="5" column="25" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Lost.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-19.192308">
@@ -1354,22 +1324,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/promote/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3432282">
-          <caret line="17" column="57" selection-start-line="17" selection-start-column="57" selection-end-line="17" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/lost/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25974026">
-          <caret line="18" column="14" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/cause/add_step_1.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.8461537">
@@ -1388,7 +1342,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/contact/add.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.0769231">
+        <state vertical-scroll-proportion="0.148423">
           <caret line="11" column="15" selection-start-line="11" selection-start-column="15" selection-end-line="11" selection-end-column="15" />
           <folding />
         </state>
@@ -1396,7 +1350,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/promote/add.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="6.923077">
+        <state vertical-scroll-proportion="-0.33395177">
           <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
           <folding />
         </state>
@@ -1404,7 +1358,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/user/profile_form.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.3846154">
+        <state vertical-scroll-proportion="0.25974026">
           <caret line="7" column="16" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
           <folding />
         </state>
@@ -1418,10 +1372,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/cause/single_entry.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.296846">
+          <caret line="5" column="25" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/cause/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3617811">
-          <caret line="16" column="40" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
+        <state vertical-scroll-proportion="-12.5">
+          <caret line="22" column="106" selection-start-line="22" selection-start-column="106" selection-end-line="22" selection-end-column="106" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/lost/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.6538463">
+          <caret line="18" column="14" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/promote/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.54545456">
+          <caret line="22" column="118" selection-start-line="22" selection-start-column="118" selection-end-line="22" selection-end-column="118" />
           <folding />
         </state>
       </provider>

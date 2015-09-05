@@ -20,7 +20,7 @@
     </div>
     <div class="col-md-9 content" id="promotesLoadingDiv">
 
-        <button type="button" id="loadMorePromotesInit" class="btn btn-primary btn-lg btn-block">View Losts and Founds</button></div>
+        <button type="button" id="loadMorePromotesInit" class="btn btn-primary btn-lg btn-block">View Promotion Offers</button></div>
 
 
 </div>
